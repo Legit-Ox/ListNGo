@@ -1,7 +1,7 @@
 ![](https://pixabay.com/vectors/shopping-cart-caddy-shopping-trolley-304843/)
 ### :handbag: A flutter app for retail use!
 
-## Features
+## Features we are planning to implement!
 
 <b>Products Features</b>
 
@@ -43,10 +43,9 @@ It might not work in some cases due to version conflits within flutter widgets, 
 
 **For futher queries, it's recommend see the notes on [this](https://docs.flutter.dev/) or visit out disscussions.**
 
-
-### Credits
-# This app is made in Ingenium Hackathon.
-**Saahil Doshi**
-**Jash Parikh**
-**Hash Bhagat**
-**Kathan Dave**
+### This app is made in Ingenium Hackathon.
+## Credits:
+**Saahil Doshi**<br />
+**Jash Parikh**<br />
+**Hash Bhagat**<br />
+**Kathan Dave**<br />
