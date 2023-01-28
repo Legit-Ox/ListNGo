@@ -35,17 +35,17 @@ For installaion, simply clone the repo using
 git clone shh-key-of-the-repo
 Now, follow the this step:
 1) Go the folder of the repo and run - flutter pub get
-2) Bingo, now the project has been setup and you can run the app using:
--flutter run
-It might not work in some cases due to version conflits within flutter widgets, where you can use:
--flutter run --no-sound-null-safety
+2) Bingo, now the project has been setup and you can run the app using:<br />
+-flutter run <br />
+It might not work in some cases due to version conflits within flutter widgets, where you can use: <br />
+-flutter run --no-sound-null-safety <br />
 
 
 **For futher queries, it's recommend see the notes on [this](https://docs.flutter.dev/) or visit out disscussions.**
 
 ### This app is made in Ingenium Hackathon.
 ## Credits:
-**Saahil Doshi**<br />
-**Jash Parikh**<br />
-**Hash Bhagat**<br />
-**Kathan Dave**<br />
+**[Saahil Doshi](https://github.com/Legit-Ox)**<br />
+**[Jash Parikh](https://github.com/Jash7447)**<br />
+**[Hash Bhagat](https://github.com/BhagatHarsh)**<br />
+**[Kathan Dave](https://github.com/KathanrDave)**<br />

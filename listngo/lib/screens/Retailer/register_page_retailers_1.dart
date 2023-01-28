@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -22,6 +23,7 @@ class _RegisterPageRetailers1State extends State<RegisterPageRetailers1> {
   final _lastNameController = TextEditingController();
   final _ageController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  final _db = FirebaseFirestore.instance;
 
   @override
   void dispose() {
@@ -137,22 +139,6 @@ class _RegisterPageRetailers1State extends State<RegisterPageRetailers1> {
                                 context)
                             .then((value) async {
                           if (value == "Success") {
-                            // await _db
-                            //     .collection('Customers')
-                            //     .doc(FirebaseAuth.instance.currentUser!.uid)
-                            //     .set({
-                            //   'Name': FirebaseAuth
-                            //       .instance.currentUser!.displayName,
-                            //   'Email': FirebaseAuth.instance.currentUser!.email,
-                            //   'Phone Number': FirebaseAuth
-                            //       .instance.currentUser!.phoneNumber,
-                            //   'Address': '',
-                            //   'City': '',
-                            //   'State': '',
-                            //   'Pincode': '',
-                            //   'Profile Picture':
-                            //       FirebaseAuth.instance.currentUser!.photoURL,
-                            // });
                             Navigator.of(context).push(
                               MaterialPageRoute(
                                 builder: (context) {
