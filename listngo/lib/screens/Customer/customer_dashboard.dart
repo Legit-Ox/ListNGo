@@ -46,8 +46,8 @@ class _CustomerDashboardScreenState extends State<CustomerDashboardScreen> {
         .then((value) {
       print(value.data()!['address'][0].toString());
       setState(() {
-        getAddress = value.data()!['address'][0].toString().length > 12
-            ? "${value.data()!['address'][0].toString().substring(0, 12)}..."
+        getAddress = value.data()!['address'][0].toString().length > 10
+            ? "${value.data()!['address'][0].toString().substring(0, 10)}..."
             : value.data()!['address'][0].toString();
       });
     });
@@ -79,9 +79,11 @@ class _CustomerDashboardScreenState extends State<CustomerDashboardScreen> {
             const SizedBox(width: 10),
             Text(
               getAddress.toString(),
-              overflow: TextOverflow.ellipsis,
+              overflow: TextOverflow.clip,
               softWrap: true,
-              style: GoogleFonts.poppins(color: Colors.black),
+              style: GoogleFonts.poppins(
+                color: Colors.black,
+              ),
             ),
           ],
         ),
