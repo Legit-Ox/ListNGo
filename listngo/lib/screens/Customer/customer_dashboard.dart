@@ -8,6 +8,7 @@ import 'package:listngo/functions/authFunctions.dart';
 import 'package:listngo/widgets/categories.dart';
 import 'package:listngo/widgets/products_list.dart';
 import 'package:listngo/widgets/shops_list.dart';
+import 'package:listngo/widgets/user_drawer.dart';
 
 import '../../utilities/Location.dart';
 
@@ -23,6 +24,8 @@ const OutlineInputBorder outlineInputBorder = OutlineInputBorder(
   borderRadius: BorderRadius.all(Radius.circular(12)),
   borderSide: BorderSide.none,
 );
+
+var _scaffoldKey = GlobalKey<ScaffoldState>();
 
 class _CustomerDashboardScreenState extends State<CustomerDashboardScreen> {
   final user = FirebaseAuth.instance.currentUser;
@@ -53,20 +56,14 @@ class _CustomerDashboardScreenState extends State<CustomerDashboardScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 234, 234, 234),
-        leading: IconButton(
-          onPressed: () {},
-          icon: SvgPicture.asset(
-            "assets/icons/menu.svg",
-            color: Colors.black,
-          ),
-        ),
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Icon(
-              Icons.location_on,
+        key: _scaffoldKey,
+        drawer: const drawerWidget(),
+        appBar: AppBar(
+          backgroundColor: const Color.fromARGB(255, 234, 234, 234),
+          leading: IconButton(
+            onPressed: () => _scaffoldKey.currentState!.openDrawer(),
+            icon: SvgPicture.asset(
+              "assets/icons/menu.svg",
               color: Colors.black,
             ),
             const SizedBox(width: 10),
