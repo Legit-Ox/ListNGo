@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:listngo/screens/Retailer/login_page_retailers.dart';
 
-import 'package:listngo/screens/Customer/register_page_customers_1.dart';
-
-class LoginPageCustomers extends StatefulWidget {
-  const LoginPageCustomers({Key? key}) : super(key: key);
+class RegisterPageRetailers1 extends StatefulWidget {
+  const RegisterPageRetailers1({Key? key}) : super(key: key);
 
   @override
-  State<LoginPageCustomers> createState() => _LoginPageCustomersState();
+  State<RegisterPageRetailers1> createState() => _RegisterPageRetailers1State();
 }
 
-class _LoginPageCustomersState extends State<LoginPageCustomers> {
+class _RegisterPageRetailers1State extends State<RegisterPageRetailers1> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
   final _firstNameController = TextEditingController();
   final _lastNameController = TextEditingController();
   final _ageController = TextEditingController();
+
   @override
   void dispose() {
     _emailController.dispose();
@@ -53,7 +53,7 @@ class _LoginPageCustomersState extends State<LoginPageCustomers> {
                 Container(
                   alignment: Alignment.center,
                   child: SvgPicture.asset(
-                    'assets/images/login.svg',
+                    'assets/images/register_customers.svg',
                     fit: BoxFit.contain,
                     height: MediaQuery.of(context).size.height * 0.2,
                   ),
@@ -65,11 +65,9 @@ class _LoginPageCustomersState extends State<LoginPageCustomers> {
                   padding: EdgeInsets.fromLTRB(
                       MediaQuery.of(context).size.width * 0.07, 0, 0, 0),
                   child: Text(
-                    'Login',
+                    'Create your account',
                     style: GoogleFonts.poppins(
-                        letterSpacing: 2,
-                        fontSize: 25,
-                        fontWeight: FontWeight.w500),
+                        fontSize: 25, fontWeight: FontWeight.w500),
                   ),
                 ),
                 SizedBox(
@@ -79,7 +77,7 @@ class _LoginPageCustomersState extends State<LoginPageCustomers> {
                   padding: EdgeInsets.fromLTRB(
                       MediaQuery.of(context).size.width * 0.07, 0, 0, 0),
                   child: Text(
-                    'You are logging in as a customer',
+                    'You are signing up as a retailer',
                     style: GoogleFonts.poppins(
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
@@ -145,7 +143,30 @@ class _LoginPageCustomersState extends State<LoginPageCustomers> {
                 ),
                 GestureDetector(
                   //Function for Sign Up to be written in this onTap
-                  onTap: () {},
+                  onTap: () {
+                    // AuthServices.signupUser(
+                    //   _emailController.text.trim(),
+                    //   _passwordController.text.trim(),
+                    //   context,
+                    // ).then((value) {
+                    //   print(value);
+                    //   if (value == 'Success') {
+                    //     Navigator.push(
+                    //       context,
+                    //       MaterialPageRoute(
+                    //         builder: (context) =>
+                    //             const RegisterPageRetailers2(),
+                    //       ),
+                    //     );
+                    //   } else {
+                    //     ScaffoldMessenger.of(context).showSnackBar(
+                    //       SnackBar(
+                    //         content: Text(value),
+                    //       ),
+                    //     );
+                    //   }
+                    // });
+                  },
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 25),
                     child: Container(
@@ -156,7 +177,7 @@ class _LoginPageCustomersState extends State<LoginPageCustomers> {
                       ),
                       child: Center(
                         child: Text(
-                          'Log In',
+                          'Submit',
                           style: GoogleFonts.poppins(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
@@ -184,6 +205,17 @@ class _LoginPageCustomersState extends State<LoginPageCustomers> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25),
                   child: GestureDetector(
+                    onTap: (() {
+                      // AuthServices.signInwithGoogle().whenComplete(() {
+                      //   Navigator.of(context).push(
+                      //     MaterialPageRoute(
+                      //       builder: (context) {
+                      //         return const RegisterPageRetailers2();
+                      //       },
+                      //     ),
+                      //   );
+                      // });
+                    }),
                     child: Container(
                       padding: const EdgeInsets.symmetric(vertical: 10),
                       decoration: BoxDecoration(
@@ -196,7 +228,7 @@ class _LoginPageCustomersState extends State<LoginPageCustomers> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              'Login With ',
+                              'Sign Up With ',
                               style: GoogleFonts.poppins(
                                   letterSpacing: 2,
                                   wordSpacing: 3,
@@ -221,7 +253,7 @@ class _LoginPageCustomersState extends State<LoginPageCustomers> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'Are you new here? ',
+                      'Already a member? ',
                       style: GoogleFonts.poppins(fontWeight: FontWeight.bold),
                     ),
                     GestureDetector(
@@ -229,12 +261,11 @@ class _LoginPageCustomersState extends State<LoginPageCustomers> {
                         Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                              builder: (context) =>
-                                  const RegisterPageCustomers1(),
+                              builder: (context) => const LoginPageRetailers(),
                             ));
                       },
                       child: Text(
-                        'Register',
+                        'Login',
                         style: GoogleFonts.poppins(
                             color: Colors.blue, fontWeight: FontWeight.bold),
                       ),

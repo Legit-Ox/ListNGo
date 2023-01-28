@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:listngo/screens/Retailer/register_page_retailers_1.dart';
 
-import 'package:listngo/screens/Customer/register_page_customers_1.dart';
-
-class LoginPageCustomers extends StatefulWidget {
-  const LoginPageCustomers({Key? key}) : super(key: key);
+class LoginPageRetailers extends StatefulWidget {
+  const LoginPageRetailers({Key? key}) : super(key: key);
 
   @override
-  State<LoginPageCustomers> createState() => _LoginPageCustomersState();
+  State<LoginPageRetailers> createState() => _LoginPageRetailersState();
 }
 
-class _LoginPageCustomersState extends State<LoginPageCustomers> {
+class _LoginPageRetailersState extends State<LoginPageRetailers> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
@@ -53,7 +52,7 @@ class _LoginPageCustomersState extends State<LoginPageCustomers> {
                 Container(
                   alignment: Alignment.center,
                   child: SvgPicture.asset(
-                    'assets/images/login.svg',
+                    'assets/images/register_customers.svg',
                     fit: BoxFit.contain,
                     height: MediaQuery.of(context).size.height * 0.2,
                   ),
@@ -65,11 +64,9 @@ class _LoginPageCustomersState extends State<LoginPageCustomers> {
                   padding: EdgeInsets.fromLTRB(
                       MediaQuery.of(context).size.width * 0.07, 0, 0, 0),
                   child: Text(
-                    'Login',
+                    'Log in',
                     style: GoogleFonts.poppins(
-                        letterSpacing: 2,
-                        fontSize: 25,
-                        fontWeight: FontWeight.w500),
+                        fontSize: 25, fontWeight: FontWeight.w500),
                   ),
                 ),
                 SizedBox(
@@ -79,7 +76,7 @@ class _LoginPageCustomersState extends State<LoginPageCustomers> {
                   padding: EdgeInsets.fromLTRB(
                       MediaQuery.of(context).size.width * 0.07, 0, 0, 0),
                   child: Text(
-                    'You are logging in as a customer',
+                    'You are logging in as a retailer',
                     style: GoogleFonts.poppins(
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
@@ -145,7 +142,28 @@ class _LoginPageCustomersState extends State<LoginPageCustomers> {
                 ),
                 GestureDetector(
                   //Function for Sign Up to be written in this onTap
-                  onTap: () {},
+                  onTap: () {
+                    // AuthServices.signinUser(
+                    //   _emailController.text.trim(),
+                    //   _passwordController.text.trim(),
+                    //   context,
+                    // ).then((value) {
+                    //   if (value == 'Success') {
+                    //     Navigator.push(
+                    //       context,
+                    //       MaterialPageRoute(
+                    //         builder: (context) => const MainPage(),
+                    //       ),
+                    //     );
+                    //   } else {
+                    //     ScaffoldMessenger.of(context).showSnackBar(
+                    //       SnackBar(
+                    //         content: Text(value),
+                    //       ),
+                    //     );
+                    //   }
+                    // });
+                  },
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 25),
                     child: Container(
@@ -221,7 +239,7 @@ class _LoginPageCustomersState extends State<LoginPageCustomers> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'Are you new here? ',
+                      'Don\'t have an account? ',
                       style: GoogleFonts.poppins(fontWeight: FontWeight.bold),
                     ),
                     GestureDetector(
@@ -230,7 +248,7 @@ class _LoginPageCustomersState extends State<LoginPageCustomers> {
                             context,
                             MaterialPageRoute(
                               builder: (context) =>
-                                  const RegisterPageCustomers1(),
+                                  const RegisterPageRetailers1(),
                             ));
                       },
                       child: Text(

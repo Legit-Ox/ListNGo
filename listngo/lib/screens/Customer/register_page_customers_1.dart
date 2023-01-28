@@ -243,7 +243,7 @@ class _RegisterPageCustomers1State extends State<RegisterPageCustomers1> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        Navigator.push(
+                        Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
                               builder: (context) => const LoginPageCustomers(),
