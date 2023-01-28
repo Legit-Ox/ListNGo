@@ -6,6 +6,7 @@ import 'package:listngo/functions/authFunctions.dart';
 import 'package:listngo/widgets/categories.dart';
 import 'package:listngo/widgets/products_list.dart';
 import 'package:listngo/widgets/shops_list.dart';
+import 'package:listngo/widgets/user_drawer.dart';
 
 class CustomerDashboardScreen extends StatefulWidget {
   const CustomerDashboardScreen({super.key});
@@ -20,14 +21,18 @@ const OutlineInputBorder outlineInputBorder = OutlineInputBorder(
   borderSide: BorderSide.none,
 );
 
+var _scaffoldKey = GlobalKey<ScaffoldState>();
+
 class _CustomerDashboardScreenState extends State<CustomerDashboardScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        key: _scaffoldKey,
+        drawer: drawerWidget(),
         appBar: AppBar(
           backgroundColor: const Color.fromARGB(255, 234, 234, 234),
           leading: IconButton(
-            onPressed: () {},
+            onPressed: () => _scaffoldKey.currentState!.openDrawer(),
             icon: SvgPicture.asset(
               "assets/icons/menu.svg",
               color: Colors.black,
