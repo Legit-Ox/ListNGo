@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -139,10 +138,6 @@ class _RegisterPageCustomers1State extends State<RegisterPageCustomers1> {
                                 _emailController.text.trim(),
                                 _passwordController.text.trim(),
                                 context)
-<<<<<<< HEAD
-                            .then((value) {
-                          if (value == "Success") {
-=======
                             .then((value) async {
                           if (value == "Success") {
                             // await _db
@@ -161,7 +156,6 @@ class _RegisterPageCustomers1State extends State<RegisterPageCustomers1> {
                             //   'Profile Picture':
                             //       FirebaseAuth.instance.currentUser!.photoURL,
                             // });
->>>>>>> 69a7d42fe3b69edd72026909c6a949e62599fad0
                             Navigator.of(context).push(
                               MaterialPageRoute(
                                 builder: (context) {
@@ -234,22 +228,22 @@ class _RegisterPageCustomers1State extends State<RegisterPageCustomers1> {
                         await AuthServices.signInwithGoogle('Customer')
                             .then((value) async {
                           if (value == "Success") {
-                            await _db
-                                .collection('Customers')
-                                .doc(FirebaseAuth.instance.currentUser!.uid)
-                                .set({
-                              'Name': FirebaseAuth
-                                  .instance.currentUser!.displayName,
-                              'Email': FirebaseAuth.instance.currentUser!.email,
-                              'Phone Number': FirebaseAuth
-                                  .instance.currentUser!.phoneNumber,
-                              'Address': '',
-                              'City': '',
-                              'State': '',
-                              'Pincode': '',
-                              'Profile Picture':
-                                  FirebaseAuth.instance.currentUser!.photoURL,
-                            });
+                            // await _db
+                            //     .collection('Customers')
+                            //     .doc(FirebaseAuth.instance.currentUser!.uid)
+                            //     .set({
+                            //   'Name': FirebaseAuth
+                            //       .instance.currentUser!.displayName,
+                            //   'Email': FirebaseAuth.instance.currentUser!.email,
+                            //   'Phone Number': FirebaseAuth
+                            //       .instance.currentUser!.phoneNumber,
+                            //   'Address': '',
+                            //   'City': '',
+                            //   'State': '',
+                            //   'Pincode': '',
+                            //   'Profile Picture':
+                            //       FirebaseAuth.instance.currentUser!.photoURL,
+                            // });
                             Navigator.of(context).push(
                               MaterialPageRoute(
                                 builder: (context) {

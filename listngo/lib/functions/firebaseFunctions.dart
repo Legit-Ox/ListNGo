@@ -10,7 +10,7 @@ class FirestoreServices {
 
   static saveUserRetailer(String email, uid) async {
     await FirebaseFirestore.instance
-        .collection('Retialer')
+        .collection('Retailer')
         .doc(uid)
         .set({'email': email});
   }

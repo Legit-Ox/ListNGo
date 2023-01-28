@@ -97,9 +97,10 @@ class _RegisterPageRetailers1State extends State<RegisterPageRetailers1> {
                   SizedBox(
                     height: size.height * 0.02,
                   ),
-                  const CustomTextField(
+                  CustomTextField(
                     hintText: 'Email',
                     validator: isEmailValid,
+                    controller: _emailController,
                   ),
                   SizedBox(
                     height: size.height * 0.01,
@@ -127,36 +128,60 @@ class _RegisterPageRetailers1State extends State<RegisterPageRetailers1> {
                   ),
                   GestureDetector(
                     //Function for Sign Up to be written in this onTap
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const RegisterPageRetailers2(),
-                        ),
-                      );
-                      AuthServices.signupUser(
-                        'Retailer',
-                        _emailController.text.trim(),
-                        _passwordController.text.trim(),
-                        context,
-                      ).then((value) {
-                        print(value);
-                        if (value == 'Success') {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  const RegisterPageRetailers2(),
-                            ),
-                          );
-                        } else {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text(value),
-                            ),
-                          );
-                        }
-                      });
+                    onTap: () async {
+                      if (_formKey.currentState!.validate()) {
+                        await AuthServices.signupUser(
+                                'Retailer',
+                                _emailController.text.trim(),
+                                _passwordController.text.trim(),
+                                context)
+                            .then((value) async {
+                          if (value == "Success") {
+                            // await _db
+                            //     .collection('Customers')
+                            //     .doc(FirebaseAuth.instance.currentUser!.uid)
+                            //     .set({
+                            //   'Name': FirebaseAuth
+                            //       .instance.currentUser!.displayName,
+                            //   'Email': FirebaseAuth.instance.currentUser!.email,
+                            //   'Phone Number': FirebaseAuth
+                            //       .instance.currentUser!.phoneNumber,
+                            //   'Address': '',
+                            //   'City': '',
+                            //   'State': '',
+                            //   'Pincode': '',
+                            //   'Profile Picture':
+                            //       FirebaseAuth.instance.currentUser!.photoURL,
+                            // });
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) {
+                                  return const RegisterPageRetailers2();
+                                },
+                              ),
+                            );
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text('Something went wrong'),
+                              ),
+                            );
+                          }
+                        });
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //     builder: (context) =>
+                        //         const RegisterPageCustomers2(),
+                        //   ),
+                        // );
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Please fill all the fields'),
+                          ),
+                        );
+                      }
                     },
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 25),
@@ -196,7 +221,7 @@ class _RegisterPageRetailers1State extends State<RegisterPageRetailers1> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 25),
                     child: GestureDetector(
-                      onTap: (() {
+                      onTap: (() async {
                         // AuthServices.signInwithGoogle().whenComplete(() {
                         //   Navigator.of(context).push(
                         //     MaterialPageRoute(
@@ -206,6 +231,24 @@ class _RegisterPageRetailers1State extends State<RegisterPageRetailers1> {
                         //     ),
                         //   );
                         // });
+                        await AuthServices.signInwithGoogle('Retailer')
+                            .then((value) async {
+                          if (value == "Success") {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) {
+                                  return const RegisterPageRetailers2();
+                                },
+                              ),
+                            );
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text('Something went wrong'),
+                              ),
+                            );
+                          }
+                        });
                       }),
                       child: Container(
                         padding: const EdgeInsets.symmetric(vertical: 10),

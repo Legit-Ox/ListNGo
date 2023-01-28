@@ -207,6 +207,42 @@ class _LoginPageCustomersState extends State<LoginPageCustomers> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 25),
                     child: GestureDetector(
+                      onTap: () async {
+                        await AuthServices.signInwithGoogle('Customer')
+                            .then((value) async {
+                          if (value == "Success") {
+                            // await _db
+                            //     .collection('Customers')
+                            //     .doc(FirebaseAuth.instance.currentUser!.uid)
+                            //     .set({
+                            //   'Name': FirebaseAuth
+                            //       .instance.currentUser!.displayName,
+                            //   'Email': FirebaseAuth.instance.currentUser!.email,
+                            //   'Phone Number': FirebaseAuth
+                            //       .instance.currentUser!.phoneNumber,
+                            //   'Address': '',
+                            //   'City': '',
+                            //   'State': '',
+                            //   'Pincode': '',
+                            //   'Profile Picture':
+                            //       FirebaseAuth.instance.currentUser!.photoURL,
+                            // });
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) {
+                                  return const CustomerDashboardScreen();
+                                },
+                              ),
+                            );
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text('Something went wrong'),
+                              ),
+                            );
+                          }
+                        });
+                      },
                       child: Container(
                         padding: const EdgeInsets.symmetric(vertical: 10),
                         decoration: BoxDecoration(
