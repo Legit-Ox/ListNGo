@@ -56,14 +56,24 @@ class _CustomerDashboardScreenState extends State<CustomerDashboardScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        key: _scaffoldKey,
-        drawer: const drawerWidget(),
-        appBar: AppBar(
-          backgroundColor: const Color.fromARGB(255, 234, 234, 234),
-          leading: IconButton(
-            onPressed: () => _scaffoldKey.currentState!.openDrawer(),
-            icon: SvgPicture.asset(
-              "assets/icons/menu.svg",
+      key: _scaffoldKey,
+      drawer: const drawerWidget(),
+      appBar: AppBar(
+        backgroundColor: const Color.fromARGB(255, 234, 234, 234),
+        leading: IconButton(
+          onPressed: () {
+            _scaffoldKey.currentState!.openDrawer();
+          },
+          icon: SvgPicture.asset(
+            "assets/icons/menu.svg",
+            color: Colors.black,
+          ),
+        ),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Icon(
+              Icons.location_on,
               color: Colors.black,
             ),
             const SizedBox(width: 10),
