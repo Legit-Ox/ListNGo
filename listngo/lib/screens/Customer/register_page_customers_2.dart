@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:listngo/screens/Customer/customer_dashboard.dart';
 import 'package:listngo/utilities/customer_textfield.dart';
 
 class RegisterPageCustomers2 extends StatefulWidget {
@@ -120,12 +121,12 @@ class _RegisterPageCustomers2State extends State<RegisterPageCustomers2> {
                 GestureDetector(
                   //Function for Sign Up to be written in this onTap
                   onTap: () {
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //     builder: (context) => const CustomerDashboardScreen(),
-                    //   ),
-                    // );
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const CustomerDashboardScreen(),
+                      ),
+                    );
                   },
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 25),
