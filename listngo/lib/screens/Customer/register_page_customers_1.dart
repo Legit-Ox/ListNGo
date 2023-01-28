@@ -121,43 +121,59 @@ class _RegisterPageCustomers1State extends State<RegisterPageCustomers1> {
                   GestureDetector(
                     //Function for Sign Up to be written in this onTap
                     onTap: () async {
-                      // if (_formKey.currentState!.validate()) {
-                      await AuthServices.signupUser(
-                              'Customer',
-                              _emailController.text.trim(),
-                              _passwordController.text.trim(),
-                              context)
-                          .then((value) {
-                        if (value == "Success") {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) {
-                                return const RegisterPageCustomers2();
-                              },
-                            ),
-                          );
-                        } else {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text('Something went wrong'),
-                            ),
-                          );
-                        }
-                      });
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) =>
-                      //         const RegisterPageCustomers2(),
-                      //   ),
-                      // );
-                      // } else {
-                      //   ScaffoldMessenger.of(context).showSnackBar(
-                      //     const SnackBar(
-                      //       content: Text('Please fill all the fields'),
-                      //     ),
-                      //   );
-                      // }
+                      if (_formKey.currentState!.validate()) {
+                        await AuthServices.signupUser(
+                                'Customer',
+                                _emailController.text.trim(),
+                                _passwordController.text.trim(),
+                                context)
+                            .then((value) async {
+                          if (value == "Success") {
+                            // await _db
+                            //     .collection('Customers')
+                            //     .doc(FirebaseAuth.instance.currentUser!.uid)
+                            //     .set({
+                            //   'Name': FirebaseAuth
+                            //       .instance.currentUser!.displayName,
+                            //   'Email': FirebaseAuth.instance.currentUser!.email,
+                            //   'Phone Number': FirebaseAuth
+                            //       .instance.currentUser!.phoneNumber,
+                            //   'Address': '',
+                            //   'City': '',
+                            //   'State': '',
+                            //   'Pincode': '',
+                            //   'Profile Picture':
+                            //       FirebaseAuth.instance.currentUser!.photoURL,
+                            // });
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) {
+                                  return const RegisterPageCustomers2();
+                                },
+                              ),
+                            );
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text('Something went wrong'),
+                              ),
+                            );
+                          }
+                        });
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //     builder: (context) =>
+                        //         const RegisterPageCustomers2(),
+                        //   ),
+                        // );
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Please fill all the fields'),
+                          ),
+                        );
+                      }
                     },
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 25),
