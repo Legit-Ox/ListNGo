@@ -34,7 +34,7 @@ class _drawerWidgetState extends State<drawerWidget> {
                   margin: EdgeInsets.zero,
 
                   decoration:
-                      BoxDecoration(color: Color.fromARGB(255, 168, 164, 250)),
+                      BoxDecoration(color: Color.fromARGB(255, 188, 184, 252)),
                   // Color.fromARGB(255, 108, 99, 255)
                   accountName: Text("User Name"),
                   accountEmail: Text("user@gmail.com"),

@@ -17,6 +17,7 @@ class Categories extends StatelessWidget {
         itemBuilder: (context, index) => CategoryCard(
           icon: demo_categories[index].icon,
           title: demo_categories[index].title,
+          color: demo_categories[index].color,
           press: () {},
         ),
         separatorBuilder: (context, index) => const SizedBox(width: 16),
@@ -31,9 +32,11 @@ class CategoryCard extends StatelessWidget {
     required this.icon,
     required this.title,
     required this.press,
+    required this.color,
   }) : super(key: key);
 
   final String icon, title;
+  final Color color;
   final VoidCallback press;
 
   @override
@@ -41,14 +44,15 @@ class CategoryCard extends StatelessWidget {
     return GestureDetector(
       onTap: press,
       child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 10),
+        padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(32),
-            border: Border.all(width: 1, color: Colors.black)),
+            borderRadius: BorderRadius.circular(15),
+            border: Border.all(width: 1, color: Colors.black),
+            color: color),
         child: Center(
           child: Text(
             title,
-            style: GoogleFonts.poppins(fontSize: 18, color: Colors.black),
+            style: GoogleFonts.poppins(fontSize: 14, color: Colors.black),
           ),
         ),
       ),

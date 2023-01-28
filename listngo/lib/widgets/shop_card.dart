@@ -24,8 +24,8 @@ class ShopCard extends StatelessWidget {
       child: Container(
         // height: MediaQuery.of(context).size.height * 0.4,
         width: MediaQuery.of(context).size.width * 0.9,
-        decoration: const BoxDecoration(
-          color: Colors.white,
+        decoration: BoxDecoration(
+          color: secondaryPurpleTint.withOpacity(0.3),
           borderRadius: BorderRadius.all(Radius.circular(12)),
         ),
         child: Column(
