@@ -31,7 +31,7 @@ class IntroPage1 extends StatelessWidget {
             padding: EdgeInsets.fromLTRB(
                 MediaQuery.of(context).size.width * 0.07, 0, 0, 0),
             child: Text(
-              'Do great work',
+              'Shop smarter, not harder!',
               style: GoogleFonts.poppins(),
             ),
           ),
@@ -42,7 +42,7 @@ class IntroPage1 extends StatelessWidget {
             padding: EdgeInsets.fromLTRB(
                 MediaQuery.of(context).size.width * 0.07, 0, 10, 0),
             child: Text(
-              'Collaborate with other and achieve maximum producitivity',
+              'Shop daily essentials with just one click at our ultimate destination.',
               style: GoogleFonts.poppins(
                   fontWeight: FontWeight.bold, fontSize: 20),
             ),

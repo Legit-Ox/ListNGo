@@ -31,7 +31,7 @@ class IntroPage3 extends StatelessWidget {
             padding: EdgeInsets.fromLTRB(
                 MediaQuery.of(context).size.width * 0.07, 0, 0, 0),
             child: Text(
-              'Do great work',
+              'Let\'s get started!',
               style: GoogleFonts.poppins(),
             ),
           ),
@@ -42,7 +42,7 @@ class IntroPage3 extends StatelessWidget {
             padding: EdgeInsets.fromLTRB(
                 MediaQuery.of(context).size.width * 0.07, 0, 10, 0),
             child: Text(
-              'Collaborate with other and achieve maximum producitivity',
+              'Get organized and save time with Listngo - your one-stop grocery shopping app.',
               style: GoogleFonts.poppins(
                   fontWeight: FontWeight.bold, fontSize: 20),
             ),
