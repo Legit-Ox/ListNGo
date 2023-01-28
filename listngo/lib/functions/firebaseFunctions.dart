@@ -1,11 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class FirestoreServices {
-  static saveUserCustomer(String email, uid) async {
+  static saveUserCustomer(uid, String email, String password) async {
     await FirebaseFirestore.instance
         .collection('Customer')
         .doc(uid)
-        .set({'email': email});
+        .set({"email": email, "password": password});
   }
 
   static saveUserRetailer(String email, uid) async {

@@ -18,7 +18,7 @@ class AuthServices {
       await FirebaseAuth.instance.currentUser!.updateEmail(email);
       if (type == 'Customer') {
         await FirestoreServices.saveUserCustomer(
-            email, userCredential.user!.uid);
+            userCredential.user!.uid, email, password);
       } else if (type == 'Retailer') {
         await FirestoreServices.saveUserRetailer(
             email, userCredential.user!.uid);
@@ -81,7 +81,10 @@ class AuthServices {
 
       if (type == 'Customer') {
         await FirestoreServices.saveUserCustomer(
-            userCredential.user!.email!, userCredential.user!.uid);
+          userCredential.user!.uid,
+          userCredential.user!.email!,
+          userCredential.user!.displayName!,
+        );
       } else if (type == 'Retailer') {
         await FirestoreServices.saveUserRetailer(
             userCredential.user!.email!, userCredential.user!.uid);
