@@ -70,8 +70,6 @@ class AuthServices {
 
       final GoogleSignInAuthentication googleSignInAuthentication =
           await googleSignInAccount!.authentication;
-
-      print(googleSignInAuthentication.accessToken);
       final AuthCredential credentials = GoogleAuthProvider.credential(
         accessToken: googleSignInAuthentication.accessToken,
         idToken: googleSignInAuthentication.idToken,
@@ -100,6 +98,10 @@ class AuthServices {
 
   Future<void> signOutFromGoogle() async {
     await GoogleSignIn().disconnect();
+    await FirebaseAuth.instance.signOut();
+  }
+
+  static Future<void> signOut() async {
     await FirebaseAuth.instance.signOut();
   }
 }
