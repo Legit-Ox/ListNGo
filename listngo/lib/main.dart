@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:listngo/screens/onboarding_screen.dart';
 import 'package:splashscreen/splashscreen.dart';
+import 'package:listngo/utilities/Location.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,6 +29,7 @@ class MyApp extends StatelessWidget {
           navigateAfterSeconds: StreamBuilder(
             stream: FirebaseAuth.instance.authStateChanges(),
             builder: (context, snapshot) {
+              registerPlatformInstance();
               if (kDebugMode) {
                 print(snapshot);
               }

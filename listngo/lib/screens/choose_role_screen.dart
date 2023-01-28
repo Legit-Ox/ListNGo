@@ -3,6 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:listngo/screens/Customer/register_page_customers_1.dart';
 import 'package:listngo/screens/Retailer/register_page_retailers_1.dart';
 
+import '../utilities/Location.dart';
+
 class ChooseRoleScreen extends StatefulWidget {
   const ChooseRoleScreen({super.key});
 
@@ -69,6 +71,7 @@ class _ChooseRoleScreenState extends State<ChooseRoleScreen> {
             ),
             GestureDetector(
               onTap: () {
+                getCurrentLocation(context).then((value) => print(value));
                 Navigator.push(
                   context,
                   MaterialPageRoute(
