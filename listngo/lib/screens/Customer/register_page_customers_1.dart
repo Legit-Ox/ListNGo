@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -24,6 +26,7 @@ class _RegisterPageCustomers1State extends State<RegisterPageCustomers1> {
   final _lastNameController = TextEditingController();
   final _ageController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  final FirebaseFirestore _db = FirebaseFirestore.instance;
   @override
   void dispose() {
     _emailController.dispose();
@@ -170,8 +173,25 @@ class _RegisterPageCustomers1State extends State<RegisterPageCustomers1> {
                     padding: const EdgeInsets.symmetric(horizontal: 25),
                     child: GestureDetector(
                       onTap: () async {
-                        await AuthServices.signInwithGoogle('Customer').then((value) {
+                        await AuthServices.signInwithGoogle('Customer')
+                            .then((value) async {
                           if (value == "Success") {
+                            await _db
+                                .collection('Customers')
+                                .doc(FirebaseAuth.instance.currentUser!.uid)
+                                .set({
+                              'Name': FirebaseAuth
+                                  .instance.currentUser!.displayName,
+                              'Email': FirebaseAuth.instance.currentUser!.email,
+                              'Phone Number': FirebaseAuth
+                                  .instance.currentUser!.phoneNumber,
+                              'Address': '',
+                              'City': '',
+                              'State': '',
+                              'Pincode': '',
+                              'Profile Picture':
+                                  FirebaseAuth.instance.currentUser!.photoURL,
+                            });
                             Navigator.of(context).push(
                               MaterialPageRoute(
                                 builder: (context) {
