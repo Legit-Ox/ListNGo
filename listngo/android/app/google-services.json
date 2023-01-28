@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1087940073005",
+    "project_id": "listngo-e256a",
+    "storage_bucket": "listngo-e256a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1087940073005:android:475c1bad74652a13e10aa4",
+        "android_client_info": {
+          "package_name": "com.example.listngo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1087940073005-b7pudmq84piatdpgrpa37q2r6c6tbs1u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCYAZd-jgVTeEfqVfZTJLrr9UYOTjwJLv4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1087940073005-b7pudmq84piatdpgrpa37q2r6c6tbs1u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

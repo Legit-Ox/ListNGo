@@ -1,10 +1,13 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:listngo/screens/onboarding_screen.dart';
 import 'package:splashscreen/splashscreen.dart';
 
 void main() async {
-  // WidgetsFlutterBinding.ensureInitialized();
-  // await Firebase.initializeApp();
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -19,32 +22,28 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
         ),
         debugShowCheckedModeBanner: false,
-
-        // home: const OnBoardingScreen(),
         home: SplashScreen(
           // photoSize: MediaQuery.of(context).size.height,
           seconds: 3,
-          navigateAfterSeconds: OnBoardingScreen(),
+          navigateAfterSeconds: StreamBuilder(
+            stream: FirebaseAuth.instance.authStateChanges(),
+            builder: (context, snapshot) {
+              if (kDebugMode) {
+                print(snapshot);
+              }
+              if (snapshot.hasData) {
+                return const OnBoardingScreen();
+              } else {
+                return const OnBoardingScreen();
+              }
+            },
+          ),
           // image: new Image.asset(
           //   'assets/images/splash.png',
           //   fit: BoxFit.cover,
           // ),
-          imageBackground: AssetImage('assets/images/splash.png'),
+          imageBackground: const AssetImage('assets/images/splash.png'),
           useLoader: false,
-        )
-        // home: StreamBuilder(
-        //   stream: FirebaseAuth.instance.authStateChanges(),
-        //   builder: (context, snapshot) {
-        //     if (kDebugMode) {
-        //       print(snapshot);
-        //     }
-        //     if (snapshot.hasData) {
-        //       return const OnBoardingScreen();
-        //     } else {
-        //       return const OnBoardingScreen();
-        //     }
-        //   },
-        // ),
-        );
+        ));
   }
 }

@@ -7,6 +7,8 @@ import 'package:listngo/screens/Customer/register_page_customers_2.dart';
 import 'package:listngo/utilities/Validators.dart';
 import 'package:listngo/utilities/customer_textfield.dart';
 
+import '../../functions/authFunctions.dart';
+
 class RegisterPageCustomers1 extends StatefulWidget {
   const RegisterPageCustomers1({Key? key}) : super(key: key);
 
@@ -167,16 +169,24 @@ class _RegisterPageCustomers1State extends State<RegisterPageCustomers1> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 25),
                     child: GestureDetector(
-                      onTap: () {
-                        // AuthServices.signInwithGoogle().whenComplete(() {
-                        //   Navigator.of(context).push(
-                        //     MaterialPageRoute(
-                        //       builder: (context) {
-                        //         return const RegisterPageCustomers2();
-                        //       },
-                        //     ),
-                        //   );
-                        // });
+                      onTap: () async {
+                        await AuthServices.signInwithGoogle('Customer').then((value) {
+                          if (value == "Success") {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) {
+                                  return const RegisterPageCustomers2();
+                                },
+                              ),
+                            );
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text('Something went wrong'),
+                              ),
+                            );
+                          }
+                        });
                       },
                       child: Container(
                         padding: const EdgeInsets.symmetric(vertical: 10),
