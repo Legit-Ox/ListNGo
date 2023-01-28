@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:listngo/functions/authFunctions.dart';
 import 'package:listngo/screens/Retailer/login_page_retailers.dart';
 import 'package:listngo/screens/Retailer/register_page_retailers_2.dart';
 import 'package:listngo/utilities/Validators.dart';
@@ -40,6 +41,8 @@ class _RegisterPageRetailers1State extends State<RegisterPageRetailers1> {
       return false;
     }
   }
+
+  bool passwordVisible = true;
 
   @override
   Widget build(BuildContext context) {
@@ -101,9 +104,23 @@ class _RegisterPageRetailers1State extends State<RegisterPageRetailers1> {
                   SizedBox(
                     height: size.height * 0.01,
                   ),
-                  const CustomTextField(
-                    validator: isPasswordValid,
+                  CustomTextField(
                     hintText: 'Password',
+                    validator: isPasswordValid,
+                    controller: _passwordController,
+                    obscureText: passwordVisible,
+                    suffixIcon: IconButton(
+                      icon: Icon(passwordVisible
+                          ? Icons.visibility
+                          : Icons.visibility_off),
+                      onPressed: () {
+                        setState(
+                          () {
+                            passwordVisible = !passwordVisible;
+                          },
+                        );
+                      },
+                    ),
                   ),
                   SizedBox(
                     height: size.height * 0.01,
@@ -117,28 +134,29 @@ class _RegisterPageRetailers1State extends State<RegisterPageRetailers1> {
                           builder: (context) => const RegisterPageRetailers2(),
                         ),
                       );
-                      // AuthServices.signupUser(
-                      //   _emailController.text.trim(),
-                      //   _passwordController.text.trim(),
-                      //   context,
-                      // ).then((value) {
-                      //   print(value);
-                      //   if (value == 'Success') {
-                      //     Navigator.push(
-                      //       context,
-                      //       MaterialPageRoute(
-                      //         builder: (context) =>
-                      //             const RegisterPageRetailers2(),
-                      //       ),
-                      //     );
-                      //   } else {
-                      //     ScaffoldMessenger.of(context).showSnackBar(
-                      //       SnackBar(
-                      //         content: Text(value),
-                      //       ),
-                      //     );
-                      //   }
-                      // });
+                      AuthServices.signupUser(
+                        'Retailer',
+                        _emailController.text.trim(),
+                        _passwordController.text.trim(),
+                        context,
+                      ).then((value) {
+                        print(value);
+                        if (value == 'Success') {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  const RegisterPageRetailers2(),
+                            ),
+                          );
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(value),
+                            ),
+                          );
+                        }
+                      });
                     },
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 25),

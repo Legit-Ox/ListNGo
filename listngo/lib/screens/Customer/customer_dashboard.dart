@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:listngo/constants.dart';
+import 'package:listngo/functions/authFunctions.dart';
 import 'package:listngo/widgets/categories.dart';
 import 'package:listngo/widgets/products_list.dart';
 import 'package:listngo/widgets/shops_list.dart';
@@ -52,7 +53,9 @@ class _CustomerDashboardScreenState extends State<CustomerDashboardScreen> {
                 Icons.notifications,
                 color: Colors.black,
               ),
-              onPressed: () {},
+              onPressed: () {
+                AuthServices.signOut(context);
+              },
             ),
           ],
         ),

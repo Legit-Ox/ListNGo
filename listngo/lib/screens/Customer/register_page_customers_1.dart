@@ -34,6 +34,7 @@ class _RegisterPageCustomers1State extends State<RegisterPageCustomers1> {
     super.dispose();
   }
 
+  bool passwordVisible = true;
   bool passwordConfirmed() {
     if (_passwordController.text.trim() ==
         _confirmPasswordController.text.trim()) {
@@ -106,11 +107,22 @@ class _RegisterPageCustomers1State extends State<RegisterPageCustomers1> {
                     height: size.height * 0.01,
                   ),
                   CustomTextField(
-                    onChanged: () {},
                     hintText: 'Password',
                     validator: isPasswordValid,
-                    obscureText: true,
                     controller: _passwordController,
+                    obscureText: passwordVisible,
+                    suffixIcon: IconButton(
+                      icon: Icon(passwordVisible
+                          ? Icons.visibility
+                          : Icons.visibility_off),
+                      onPressed: () {
+                        setState(
+                          () {
+                            passwordVisible = !passwordVisible;
+                          },
+                        );
+                      },
+                    ),
                   ),
                   SizedBox(
                     height: size.height * 0.01,
@@ -118,43 +130,43 @@ class _RegisterPageCustomers1State extends State<RegisterPageCustomers1> {
                   GestureDetector(
                     //Function for Sign Up to be written in this onTap
                     onTap: () async {
-                      // if (_formKey.currentState!.validate()) {
-                      await AuthServices.signupUser(
-                              'Customer',
-                              _emailController.text.trim(),
-                              _passwordController.text.trim(),
-                              context)
-                          .then((value) {
-                        if (value == "Success") {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) {
-                                return const RegisterPageCustomers2();
-                              },
-                            ),
-                          );
-                        } else {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text('Something went wrong'),
-                            ),
-                          );
-                        }
-                      });
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) =>
-                      //         const RegisterPageCustomers2(),
-                      //   ),
-                      // );
-                      // } else {
-                      //   ScaffoldMessenger.of(context).showSnackBar(
-                      //     const SnackBar(
-                      //       content: Text('Please fill all the fields'),
-                      //     ),
-                      //   );
-                      // }
+                      if (_formKey.currentState!.validate()) {
+                        await AuthServices.signupUser(
+                                'Customer',
+                                _emailController.text.trim(),
+                                _passwordController.text.trim(),
+                                context)
+                            .then((value) {
+                          if (value == "Success") {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) {
+                                  return const RegisterPageCustomers2();
+                                },
+                              ),
+                            );
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text('Something went wrong'),
+                              ),
+                            );
+                          }
+                        });
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //     builder: (context) =>
+                        //         const RegisterPageCustomers2(),
+                        //   ),
+                        // );
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Please fill all the fields'),
+                          ),
+                        );
+                      }
                     },
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 25),

@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:listngo/functions/firebaseFunctions.dart';
+import 'package:listngo/screens/choose_role_screen.dart';
 
 class AuthServices {
   final googleSignIn = GoogleSignIn();
@@ -101,7 +102,9 @@ class AuthServices {
     await FirebaseAuth.instance.signOut();
   }
 
-  static Future<void> signOut() async {
+  static Future<void> signOut(BuildContext context) async {
     await FirebaseAuth.instance.signOut();
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => const ChooseRoleScreen()));
   }
 }

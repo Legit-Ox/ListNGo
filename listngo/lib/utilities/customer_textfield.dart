@@ -12,6 +12,7 @@ class CustomTextField extends StatelessWidget {
     this.margin,
     this.padding,
     this.obscureText,
+    this.suffixIcon,
   }) : super(key: key);
   final Function? onChanged;
   final Function? validator;
@@ -19,6 +20,7 @@ class CustomTextField extends StatelessWidget {
   final TextEditingController? controller;
   final String? hintText;
   final Icon? prefixIcon;
+  final IconButton? suffixIcon;
   final EdgeInsets? margin;
   final EdgeInsets? padding;
   final bool? obscureText;
@@ -50,6 +52,7 @@ class CustomTextField extends StatelessWidget {
             decoration: InputDecoration(
               border: InputBorder.none,
               prefixIcon: prefixIcon,
+              suffixIcon: suffixIcon,
               hintText: hintText,
               hintStyle: GoogleFonts.poppins(),
             ),
