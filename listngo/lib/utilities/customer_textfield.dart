@@ -40,14 +40,8 @@ class CustomTextField extends StatelessWidget {
           padding: padding ??
               const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           child: TextFormField(
-            validator: (value) {
-              if (validator == null) {
-                return null;
-              } else {
-                String? message = validator!(value);
-                return message;
-              }
-            },
+            validator: ((value) =>
+                (validator != null ? validator!(value) : null)),
             controller: controller,
             style: GoogleFonts.poppins(fontSize: 16),
             decoration: InputDecoration(

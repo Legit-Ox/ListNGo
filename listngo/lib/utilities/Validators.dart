@@ -1,10 +1,8 @@
-mixin InputValidationMixin {
-  bool isPasswordValid(String password) => password.length == 6;
+import 'package:email_validator/email_validator.dart';
 
-  bool isEmailValid(String email) {
-    String pattern =
-        r'^(([^<>()[]\\.,;:s@"]+(.[^<>()[]\\.,;:s@"]+)*)|(".+"))@(([[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}])|(([a-zA-Z-0-9]+.)+[a-zA-Z]{2,}))$';
-    RegExp regex = RegExp(pattern);
-    return regex.hasMatch(email);
-  }
+String? isPasswordValid(String password) =>
+    password.length >= 6 ? null : "Invalid Password";
+
+String? isEmailValid(String email) {
+  return EmailValidator.validate(email) ? null : "Invalid Email";
 }
