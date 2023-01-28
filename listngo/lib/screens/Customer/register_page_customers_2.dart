@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:listngo/utilities/customer_textfield.dart';
 
 class RegisterPageCustomers2 extends StatefulWidget {
   const RegisterPageCustomers2({Key? key}) : super(key: key);
@@ -138,31 +139,12 @@ class _RegisterPageCustomers2State extends State<RegisterPageCustomers2> {
                 SizedBox(
                   height: size.height * 0.01,
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.grey[200],
-                      border: Border.all(color: Colors.white),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 0, vertical: 8),
-                      child: TextField(
-                        controller: _nameController,
-                        style: GoogleFonts.poppins(fontSize: 16),
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          prefixIcon: const Icon(
-                            Icons.location_on_outlined,
-                            color: Color.fromARGB(255, 57, 57, 57),
-                          ),
-                          hintText: 'Location',
-                          hintStyle: GoogleFonts.poppins(),
-                        ),
-                      ),
-                    ),
+                CustomTextField(
+                  onChanged: () {},
+                  hintText: 'Location',
+                  prefixIcon: const Icon(
+                    Icons.location_on_outlined,
+                    color: Color.fromARGB(255, 52, 52, 52),
                   ),
                 ),
                 SizedBox(
