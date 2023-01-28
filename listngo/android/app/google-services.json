@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "1087940073005",
+    "firebase_url": "https://listngo-e256a-default-rtdb.firebaseio.com",
     "project_id": "listngo-e256a",
     "storage_bucket": "listngo-e256a.appspot.com"
   },
@@ -14,7 +15,23 @@
       },
       "oauth_client": [
         {
-          "client_id": "1087940073005-b7pudmq84piatdpgrpa37q2r6c6tbs1u.apps.googleusercontent.com",
+          "client_id": "1087940073005-k3sfk17mok2jkh6p8i5t434g2m5h6uhj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.listngo",
+            "certificate_hash": "c1be657e31b2bc319237fc0e12521123b84daf4e"
+          }
+        },
+        {
+          "client_id": "1087940073005-scfpq0th45458q2stct30v156isad8j0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.listngo",
+            "certificate_hash": "ec25b4c8d48bc1d69fce578bda49044ffc88f109"
+          }
+        },
+        {
+          "client_id": "1087940073005-fnblu62e4p706osa29stshkv8n2bkf1r.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -29,6 +46,13 @@
             {
               "client_id": "1087940073005-b7pudmq84piatdpgrpa37q2r6c6tbs1u.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "1087940073005-evejsng8q652i5o07678nt2dn7iep1qu.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.listngo"
+              }
             }
           ]
         }

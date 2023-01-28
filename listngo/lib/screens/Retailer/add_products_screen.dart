@@ -48,107 +48,110 @@ class _AddProductsState extends State<AddProducts> {
             ),
             content: SizedBox(
               height: MediaQuery.of(context).size.height / 6,
-              child: Column(
-                children: [
-                  // ElevatedButton(
-                  //   //if user click this button, user can upload image from gallery
-                  //   onPressed: () {
-                  //     Navigator.pop(context);
-                  //     getImage(ImageSource.gallery);
-                  //   },
-                  //   child: Row(
-                  //     children: const [
-                  //       Icon(Icons.image),
-                  //       Text('From Gallery'),
-                  //     ],
-                  //   ),
-                  // ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pop(context);
-                      getImage(ImageSource.gallery);
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 10, vertical: 10),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Colors.grey[200],
-                          border: Border.all(color: Colors.white),
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 16, vertical: 8),
-                          child: Row(
-                            children: [
-                              const Icon(
-                                Icons.add_a_photo,
-                                size: 16,
-                              ),
-                              const SizedBox(
-                                width: 10,
-                              ),
-                              Text(
-                                'From Gallery',
-                                style: GoogleFonts.poppins(fontSize: 16),
-                              ),
-                            ],
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    // ElevatedButton(
+                    //   //if user click this button, user can upload image from gallery
+                    //   onPressed: () {
+                    //     Navigator.pop(context);
+                    //     getImage(ImageSource.gallery);
+                    //   },
+                    //   child: Row(
+                    //     children: const [
+                    //       Icon(Icons.image),
+                    //       Text('From Gallery'),
+                    //     ],
+                    //   ),
+                    // ),
+
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.pop(context);
+                        getImage(ImageSource.gallery);
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 10, vertical: 10),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Colors.grey[200],
+                            border: Border.all(color: Colors.white),
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 16, vertical: 8),
+                            child: Row(
+                              children: [
+                                const Icon(
+                                  Icons.add_a_photo,
+                                  size: 16,
+                                ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                Text(
+                                  'From Gallery',
+                                  style: GoogleFonts.poppins(fontSize: 16),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pop(context);
-                      getImage(ImageSource.camera);
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 10, vertical: 10),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Colors.grey[200],
-                          border: Border.all(color: Colors.white),
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 16, vertical: 8),
-                          child: Row(
-                            children: [
-                              const Icon(
-                                Icons.add_a_photo,
-                                size: 16,
-                              ),
-                              const SizedBox(
-                                width: 10,
-                              ),
-                              Text(
-                                'From Camera',
-                                style: GoogleFonts.poppins(fontSize: 16),
-                              ),
-                            ],
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.pop(context);
+                        getImage(ImageSource.camera);
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 10, vertical: 10),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Colors.grey[200],
+                            border: Border.all(color: Colors.white),
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 16, vertical: 8),
+                            child: Row(
+                              children: [
+                                const Icon(
+                                  Icons.add_a_photo,
+                                  size: 16,
+                                ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                Text(
+                                  'From Camera',
+                                  style: GoogleFonts.poppins(fontSize: 16),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                  // ElevatedButton(
-                  //   //if user click this button. user can upload image from camera
-                  //   onPressed: () {
-                  //     Navigator.pop(context);
-                  //     getImage(ImageSource.camera);
-                  //   },
-                  //   child: Row(
-                  //     children: const [
-                  //       Icon(Icons.camera),
-                  //       Text('From Camera'),
-                  //     ],
-                  //   ),
-                  // ),
-                ],
+                    // ElevatedButton(
+                    //   //if user click this button. user can upload image from camera
+                    //   onPressed: () {
+                    //     Navigator.pop(context);
+                    //     getImage(ImageSource.camera);
+                    //   },
+                    //   child: Row(
+                    //     children: const [
+                    //       Icon(Icons.camera),
+                    //       Text('From Camera'),
+                    //     ],
+                    //   ),
+                    // ),
+                  ],
+                ),
               ),
             ),
           );
@@ -177,7 +180,7 @@ class _AddProductsState extends State<AddProducts> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
-                height: size.height * 0.01,
+                height: size.height * 0.1,
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25),
@@ -250,7 +253,7 @@ class _AddProductsState extends State<AddProducts> {
                                   width: size.width * 0.05,
                                 ),
                                 Text(
-                                  'Add an image of your shop',
+                                  'Image of your shop',
                                   style: GoogleFonts.poppins(fontSize: 16),
                                 ),
                               ],

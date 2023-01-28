@@ -58,10 +58,10 @@ class _RetailerMainPageState extends State<RetailerMainPage> {
 
   Container buildMyNavBar(BuildContext context) {
     return Container(
-      height: 70,
-      decoration: BoxDecoration(
+      height: 74,
+      decoration: const BoxDecoration(
         color: primaryGreen,
-        borderRadius: const BorderRadius.only(
+        borderRadius: BorderRadius.only(
           topLeft: Radius.circular(20),
           topRight: Radius.circular(20),
         ),
@@ -87,7 +87,7 @@ class _RetailerMainPageState extends State<RetailerMainPage> {
                     Text(
                       'Dashboard',
                       style: GoogleFonts.poppins(color: Colors.white),
-                    )
+                    ),
                   ],
                 )
               : IconButton(
