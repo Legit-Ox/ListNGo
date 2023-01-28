@@ -91,9 +91,11 @@ class AuthServices {
       if (kDebugMode) {
         print("WOOOPSSSS");
         print(e.message);
+        return "";
       }
       rethrow;
     }
+    return "Success";
   }
 
   Future<void> signOutFromGoogle() async {
