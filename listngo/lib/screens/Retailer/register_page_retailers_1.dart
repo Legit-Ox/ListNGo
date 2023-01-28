@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:listngo/screens/Retailer/login_page_retailers.dart';
 import 'package:listngo/screens/Retailer/register_page_retailers_2.dart';
+import 'package:listngo/utilities/customer_textfield.dart';
 
 class RegisterPageRetailers1 extends StatefulWidget {
   const RegisterPageRetailers1({Key? key}) : super(key: key);
@@ -89,55 +90,14 @@ class _RegisterPageRetailers1State extends State<RegisterPageRetailers1> {
                 SizedBox(
                   height: size.height * 0.02,
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.grey[200],
-                      border: Border.all(color: Colors.white),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 16, vertical: 8),
-                      child: TextField(
-                        controller: _emailController,
-                        style: GoogleFonts.poppins(fontSize: 16),
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          hintText: 'Email',
-                          hintStyle: GoogleFonts.poppins(),
-                        ),
-                      ),
-                    ),
-                  ),
+                const CustomTextField(
+                  hintText: 'Email',
                 ),
                 SizedBox(
                   height: size.height * 0.01,
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.grey[200],
-                      border: Border.all(color: Colors.white),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 16, vertical: 8),
-                      child: TextField(
-                        style: GoogleFonts.poppins(fontSize: 14),
-                        controller: _passwordController,
-                        obscureText: true,
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          hintText: 'Password',
-                          hintStyle: GoogleFonts.poppins(),
-                        ),
-                      ),
-                    ),
-                  ),
+                const CustomTextField(
+                  hintText: 'Password',
                 ),
                 SizedBox(
                   height: size.height * 0.01,

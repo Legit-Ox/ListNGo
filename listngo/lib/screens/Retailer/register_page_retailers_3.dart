@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:listngo/utilities/customer_textfield.dart';
 
 class RegisterPageRetailers3 extends StatefulWidget {
   const RegisterPageRetailers3({Key? key}) : super(key: key);
@@ -66,27 +67,8 @@ class _RegisterPageRetailers3State extends State<RegisterPageRetailers3> {
                 SizedBox(
                   height: size.height * 0.02,
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.grey[200],
-                      border: Border.all(color: Colors.white),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 16, vertical: 8),
-                      child: TextField(
-                        style: GoogleFonts.poppins(fontSize: 16),
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          hintText: 'Shop Name',
-                          hintStyle: GoogleFonts.poppins(),
-                        ),
-                      ),
-                    ),
-                  ),
+                const CustomTextField(
+                  hintText: 'Shop Name',
                 ),
                 SizedBox(
                   height: size.height * 0.01,
@@ -134,58 +116,18 @@ class _RegisterPageRetailers3State extends State<RegisterPageRetailers3> {
                 SizedBox(
                   height: size.height * 0.01,
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.grey[200],
-                      border: Border.all(color: Colors.white),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 16, vertical: 8),
-                      child: TextField(
-                        style: GoogleFonts.poppins(fontSize: 16),
-                        // controller: _phoneNumberController,
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          hintText: 'GST ID (Optional)',
-                          hintStyle: GoogleFonts.poppins(),
-                        ),
-                      ),
-                    ),
-                  ),
+                const CustomTextField(
+                  hintText: 'GST ID (Optional)',
                 ),
                 SizedBox(
                   height: size.height * 0.01,
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.grey[200],
-                      border: Border.all(color: Colors.white),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 0, vertical: 8),
-                      child: TextField(
-                        controller: _nameController,
-                        style: GoogleFonts.poppins(fontSize: 16),
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          prefixIcon: const Icon(
-                            Icons.location_on_outlined,
-                            color: Color.fromARGB(255, 57, 57, 57),
-                          ),
-                          hintText: 'Location',
-                          hintStyle: GoogleFonts.poppins(),
-                        ),
-                      ),
-                    ),
+                const CustomTextField(
+                  prefixIcon: Icon(
+                    Icons.location_on_outlined,
+                    color: Color.fromARGB(255, 57, 57, 57),
                   ),
+                  hintText: 'Location',
                 ),
                 SizedBox(
                   height: size.height * 0.01,
