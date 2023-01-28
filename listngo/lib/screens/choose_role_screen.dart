@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:listngo/screens/Customer/register_page_customers_1.dart';
 
 class ChooseRoleScreen extends StatefulWidget {
   const ChooseRoleScreen({super.key});
@@ -67,12 +68,12 @@ class _ChooseRoleScreenState extends State<ChooseRoleScreen> {
             ),
             GestureDetector(
               onTap: () {
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(
-                //     builder: (context) => const RegisterPageCustomers1(),
-                //   ),
-                // );
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const RegisterPageCustomers1(),
+                  ),
+                );
               },
               child: Container(
                 padding: EdgeInsets.symmetric(
