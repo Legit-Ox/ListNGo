@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:cupertino_icons/cupertino_icons.dart';
 import 'package:flutter/cupertino.dart';
 
 class drawerWidget extends StatefulWidget {
@@ -22,26 +21,26 @@ class _drawerWidgetState extends State<drawerWidget> {
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
-            color: Color.fromARGB(255, 207, 204, 252),
+            color: const Color.fromARGB(255, 207, 204, 252),
           ),
           // margin: EdgeInsets.all(20),
 
           child: ListView(
             padding: EdgeInsets.zero,
-            children: [
+            children: const [
               DrawerHeader(
                 padding: EdgeInsets.zero,
-                
                 child: UserAccountsDrawerHeader(
                   margin: EdgeInsets.zero,
-                  
+
                   decoration:
                       BoxDecoration(color: Color.fromARGB(255, 168, 164, 250)),
-                      // Color.fromARGB(255, 108, 99, 255)
+                  // Color.fromARGB(255, 108, 99, 255)
                   accountName: Text("User Name"),
                   accountEmail: Text("user@gmail.com"),
                   currentAccountPicture: CircleAvatar(
-                    backgroundImage: AssetImage("assets/images/dp.jpg"),//user image
+                    backgroundImage:
+                        AssetImage("assets/images/dp.jpg"), //user image
                   ),
                 ),
               ),
