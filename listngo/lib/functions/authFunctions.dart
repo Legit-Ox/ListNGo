@@ -21,7 +21,7 @@ class AuthServices {
             userCredential.user!.uid, email, password);
       } else if (type == 'Retailer') {
         await FirestoreServices.saveUserRetailer(
-            email, userCredential.user!.uid);
+            userCredential.user!.uid, email, password);
       }
       // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
@@ -87,7 +87,10 @@ class AuthServices {
         );
       } else if (type == 'Retailer') {
         await FirestoreServices.saveUserRetailer(
-            userCredential.user!.email!, userCredential.user!.uid);
+          userCredential.user!.uid,
+          userCredential.user!.email!,
+          userCredential.user!.displayName!,
+        );
       }
     } on FirebaseAuthException catch (e) {
       if (kDebugMode) {
