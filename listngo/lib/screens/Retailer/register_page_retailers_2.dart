@@ -148,7 +148,8 @@ class _RegisterPageRetailers2State extends State<RegisterPageRetailers2> {
                             borderRadius: BorderRadius.circular(12),
                           ),
                           child: Padding(
-                            padding: const EdgeInsets.all(20),
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 20, horizontal: 10),
                             child: Text(
                               '+91',
                               style: GoogleFonts.poppins(),

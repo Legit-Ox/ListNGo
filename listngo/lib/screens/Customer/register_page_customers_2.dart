@@ -59,27 +59,8 @@ class _RegisterPageCustomers2State extends State<RegisterPageCustomers2> {
                 SizedBox(
                   height: size.height * 0.02,
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.grey[200],
-                      border: Border.all(color: Colors.white),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 16, vertical: 8),
-                      child: TextField(
-                        style: GoogleFonts.poppins(fontSize: 16),
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          hintText: 'Name',
-                          hintStyle: GoogleFonts.poppins(),
-                        ),
-                      ),
-                    ),
-                  ),
+                const CustomTextField(
+                  hintText: 'Name',
                 ),
                 SizedBox(
                   height: size.height * 0.01,
@@ -110,27 +91,13 @@ class _RegisterPageCustomers2State extends State<RegisterPageCustomers2> {
                       const SizedBox(
                         width: 5,
                       ),
-                      Flexible(
+                      const Flexible(
                         flex: 5,
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: Colors.grey[200],
-                            border: Border.all(color: Colors.white),
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 16, vertical: 8),
-                            child: TextField(
-                              style: GoogleFonts.poppins(fontSize: 16),
-                              // controller: _phoneNumberController,
-                              decoration: InputDecoration(
-                                border: InputBorder.none,
-                                hintText: 'Phone Number',
-                                hintStyle: GoogleFonts.poppins(),
-                              ),
-                            ),
-                          ),
+                        child: CustomTextField(
+                          hintText: 'Phone Number',
+                          margin: EdgeInsets.all(0),
+                          padding:
+                              EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                         ),
                       ),
                     ],

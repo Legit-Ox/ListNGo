@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:listngo/screens/Retailer/login_page_retailers.dart';
+import 'package:listngo/screens/Retailer/register_page_retailers_2.dart';
 
 class RegisterPageRetailers1 extends StatefulWidget {
   const RegisterPageRetailers1({Key? key}) : super(key: key);
@@ -144,6 +145,12 @@ class _RegisterPageRetailers1State extends State<RegisterPageRetailers1> {
                 GestureDetector(
                   //Function for Sign Up to be written in this onTap
                   onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const RegisterPageRetailers2(),
+                      ),
+                    );
                     // AuthServices.signupUser(
                     //   _emailController.text.trim(),
                     //   _passwordController.text.trim(),

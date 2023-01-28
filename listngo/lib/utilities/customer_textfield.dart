@@ -4,16 +4,22 @@ import 'package:google_fonts/google_fonts.dart';
 class CustomTextField extends StatelessWidget {
   const CustomTextField({
     Key? key,
-    required this.onChanged,
+    this.onChanged,
     this.controller,
     this.hintText,
     this.prefixIcon,
+    this.validator,
+    this.margin,
+    this.padding,
   }) : super(key: key);
-  final Function onChanged;
+  final Function? onChanged;
+  final Function? validator;
 
   final TextEditingController? controller;
   final String? hintText;
   final Icon? prefixIcon;
+  final EdgeInsets? margin;
+  final EdgeInsets? padding;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +29,7 @@ class CustomTextField extends StatelessWidget {
       width = height;
     }
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 25),
+      padding: margin ?? const EdgeInsets.symmetric(horizontal: 25),
       child: Container(
         decoration: BoxDecoration(
           color: Colors.grey[200],
@@ -31,8 +37,17 @@ class CustomTextField extends StatelessWidget {
           borderRadius: BorderRadius.circular(12),
         ),
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          child: TextField(
+          padding: padding ??
+              const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          child: TextFormField(
+            validator: (value) {
+              if (validator == null) {
+                return null;
+              } else {
+                String? message = validator!(value);
+                return message;
+              }
+            },
             controller: controller,
             style: GoogleFonts.poppins(fontSize: 16),
             decoration: InputDecoration(
@@ -42,7 +57,7 @@ class CustomTextField extends StatelessWidget {
               hintStyle: GoogleFonts.poppins(),
             ),
             onChanged: (value) {
-              onChanged(value);
+              onChanged!(value);
             },
           ),
         ),
