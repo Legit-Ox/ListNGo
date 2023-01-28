@@ -1,10 +1,14 @@
 import 'dart:io';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:geolocator_android/geolocator_android.dart';
 import 'package:geolocator_apple/geolocator_apple.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+final user = FirebaseAuth.instance.currentUser;
 
 void registerPlatformInstance() {
   if (Platform.isAndroid) {
@@ -14,22 +18,20 @@ void registerPlatformInstance() {
   }
 }
 
-Future<String> getCurrentLocation(context) async {
-  await handleLocationPermission(context);
-  return await getCurrentPosition(context);
+void storeUsersAddress(address) async {
+  print(user!.uid);
+  FirebaseFirestore.instance
+      .collection('Customer')
+      .doc(user!.uid)
+      .update({"address": List.from(address)});
 }
 
-const Position defaultPosition = Position(
-    longitude: 0,
-    latitude: 0,
-    timestamp: null,
-    accuracy: 0,
-    altitude: 0,
-    heading: 0,
-    speed: 0,
-    speedAccuracy: 0);
+Future<void> getCurrentLocation(context) async {
+  await handleLocationPermission(context);
+  await getCurrentPosition(context);
+}
 
-Future<String> getCurrentPosition(context) async {
+Future<dynamic> getCurrentPosition(context) async {
   final hasPermission = await handleLocationPermission(context);
 
   if (!hasPermission) {
@@ -48,16 +50,17 @@ Future<String> getCurrentPosition(context) async {
     await placemarkFromCoordinates(position.latitude, position.longitude)
         .then((List<Placemark> placemarks) {
       Placemark place = placemarks[0];
-      print(place);
-      String currentAddress =
-          '${place.street}, ${place.subLocality}, ${place.subAdministrativeArea}, ${place.postalCode}';
-      return currentAddress;
+      storeUsersAddress({
+        place.street.toString(),
+        place.subLocality.toString(),
+        place.subAdministrativeArea.toString(),
+        place.postalCode.toString(),
+        place.country.toString(),
+      });
     }).catchError((e) {
       debugPrint(e);
     });
   }
-
-  return "No location found";
 }
 
 Future<bool> handleLocationPermission(context) async {
