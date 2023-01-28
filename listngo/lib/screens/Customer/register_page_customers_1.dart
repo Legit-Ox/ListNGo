@@ -108,6 +108,7 @@ class _RegisterPageCustomers1State extends State<RegisterPageCustomers1> {
                     onChanged: () {},
                     hintText: 'Password',
                     validator: isPasswordValid,
+                    obscureText: true,
                   ),
                   SizedBox(
                     height: size.height * 0.01,
@@ -170,7 +171,8 @@ class _RegisterPageCustomers1State extends State<RegisterPageCustomers1> {
                     padding: const EdgeInsets.symmetric(horizontal: 25),
                     child: GestureDetector(
                       onTap: () async {
-                        await AuthServices.signInwithGoogle('Customer').then((value) {
+                        await AuthServices.signInwithGoogle('Customer')
+                            .then((value) {
                           if (value == "Success") {
                             Navigator.of(context).push(
                               MaterialPageRoute(
