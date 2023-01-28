@@ -181,9 +181,6 @@ class _RegisterPageRetailers2State extends State<RegisterPageRetailers2> {
                           'role': selectedValue1!.trim(),
                           'phone': _phoneNumberController.text.trim(),
                         });
-                        print("Added to database");
-                        print(
-                            "$_nameController.text + $_phoneNumberController.text + $selectedValue1");
                         Navigator.push(
                           context,
                           MaterialPageRoute(

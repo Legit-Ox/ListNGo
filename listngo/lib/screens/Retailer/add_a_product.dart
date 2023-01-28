@@ -15,14 +15,6 @@ class AddAProduct extends StatefulWidget {
 class _AddAProductState extends State<AddAProduct> {
   final _nameController = TextEditingController();
   final _phoneNumberController = TextEditingController();
-  final roles = [
-    'Stationary',
-    'General Stores',
-    'Medicine',
-    'Grocery Stores',
-    'Others',
-  ];
-  String? selectedValue1;
   bool isRoleOthers = false;
   XFile? image;
   Future getImage(ImageSource media) async {
@@ -48,19 +40,6 @@ class _AddAProductState extends State<AddAProduct> {
               height: MediaQuery.of(context).size.height / 6,
               child: Column(
                 children: [
-                  // ElevatedButton(
-                  //   //if user click this button, user can upload image from gallery
-                  //   onPressed: () {
-                  //     Navigator.pop(context);
-                  //     getImage(ImageSource.gallery);
-                  //   },
-                  //   child: Row(
-                  //     children: const [
-                  //       Icon(Icons.image),
-                  //       Text('From Gallery'),
-                  //     ],
-                  //   ),
-                  // ),
                   GestureDetector(
                     onTap: () {
                       Navigator.pop(context);
