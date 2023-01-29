@@ -20,6 +20,19 @@ class _AddAProductState extends State<AddAProduct> {
   final _descController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   final _db = FirebaseFirestore.instance;
+  List<dynamic> prods = [];
+  Future<void> _getProducts() async {
+    await FirebaseFirestore.instance
+        .collection('Retailer')
+        .doc((FirebaseAuth.instance.currentUser)!.uid)
+        .get()
+        .then((value) {
+      setState(() async {
+        prods = await value.data()!['Products'];
+      });
+    });
+  }
+
   bool isRoleOthers = false;
   XFile? image;
   Future getImage(ImageSource media) async {
@@ -122,6 +135,13 @@ class _AddAProductState extends State<AddAProduct> {
             ),
           );
         });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    _getProducts();
+    super.initState();
   }
 
   final ImagePicker picker = ImagePicker();
@@ -335,18 +355,20 @@ class _AddAProductState extends State<AddAProduct> {
                       await _db
                           .collection('Retailer')
                           .doc(FirebaseAuth.instance.currentUser!.uid)
-                          .collection('Products')
-                          .add({
-                        "Products": {
-                          'name': _nameController.text,
-                          'price': _priceController.text,
-                          'description': _descController.text,
-                        }
+                          .update({
+                        "Products": prods +
+                            [
+                              {
+                                'name': _nameController.text,
+                                'price': _priceController.text,
+                                'description': _descController.text,
+                              }
+                            ]
                       });
                     } catch (e) {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text("Something went wrong"),
+                        SnackBar(
+                          content: Text(e.toString()),
                         ),
                       );
                     }
