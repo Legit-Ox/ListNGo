@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:listngo/constants.dart';
+import 'package:listngo/screens/Retailer/add_a_product.dart';
 import 'package:listngo/screens/Retailer/retailer_product_detail_screen.dart';
 import 'package:listngo/utilities/customer_textfield.dart';
 import 'package:listngo/widgets/product_card.dart';
@@ -236,7 +237,10 @@ class _RetailerAddDetailsState extends State<RetailerAddDetails> {
             height: size.height * 0.02,
           ),
           GestureDetector(
-            onTap: () {},
+            onTap: () {
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => const AddAProduct()));
+            },
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 25),
               child: Row(

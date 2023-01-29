@@ -3,6 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:listngo/constants.dart';
+import 'package:listngo/screens/Retailer/retailer_product_detail_screen.dart';
+import 'package:listngo/widgets/product_card.dart';
 
 class RetailerDashboard extends StatefulWidget {
   const RetailerDashboard({super.key});
@@ -17,11 +19,23 @@ const OutlineInputBorder outlineInputBorder = OutlineInputBorder(
 );
 
 class _RetailerDashboardState extends State<RetailerDashboard> {
+  late List<dynamic> products = [];
   late String? getName = "";
   late String? getType = "";
   late String? getArea = "";
   late String? getDesc = "";
   late String? getUrl = "";
+  Future<void> setProducts() async {
+    await FirebaseFirestore.instance
+        .collection('Retailer')
+        .doc((FirebaseAuth.instance.currentUser)!.uid)
+        .get()
+        .then((value) {
+      setState(() {
+        products = value.data()!['Products'];
+      });
+    });
+  }
 
   Future<void> _getShopName() async {
     await FirebaseFirestore.instance
@@ -97,6 +111,7 @@ class _RetailerDashboardState extends State<RetailerDashboard> {
   @override
   void initState() {
     // TODO: implement initState
+    setProducts();
     _getUrl();
     _getDesc();
     _getArea();
@@ -204,14 +219,13 @@ class _RetailerDashboardState extends State<RetailerDashboard> {
             SizedBox(
               height: size.height * 0.01,
             ),
-           
             SizedBox(
               height: size.height * 0.01,
             ),
             Text(
               'About',
               style: GoogleFonts.poppins(
-                  fontSize: 18, color: const Color.fromARGB(255, 146, 146, 146) ),
+                  fontSize: 16, color: const Color.fromARGB(255, 0, 0, 0)),
             ),
             const Divider(
               thickness: 2,
@@ -232,6 +246,34 @@ class _RetailerDashboardState extends State<RetailerDashboard> {
             const Divider(
               thickness: 2,
               color: Color.fromARGB(255, 146, 146, 146),
+            ),
+            Center(
+              child: Wrap(
+                  spacing: 10,
+                  runSpacing: 20,
+                  alignment: WrapAlignment.spaceEvenly,
+                  runAlignment: WrapAlignment.spaceEvenly,
+                  children: List.generate(
+                      products.length,
+                      (index) => ProductCard(
+                            name: products[index]['name'],
+                            image: products[index]['image'],
+                            price: products[index]['price'],
+                            description: products[index]['description'],
+                            press: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => RetailerDetailScreen(
+                                      title: products[index]['name'],
+                                      image: products[index]['image'],
+                                      price: products[index]['price'],
+                                      description: products[index]
+                                          ['description'],
+                                    ),
+                                  ));
+                            },
+                          ))),
             ),
           ],
         ),

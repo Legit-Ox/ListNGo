@@ -70,7 +70,7 @@ class RetailerDetailScreen extends StatelessWidget {
                       ),
                       const SizedBox(width: 16),
                       Text(
-                        "\$$price",
+                        "Rs$price",
                         style: Theme.of(context).textTheme.titleLarge,
                       ),
                     ],

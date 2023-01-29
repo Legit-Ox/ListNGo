@@ -72,7 +72,7 @@ class _RetailerMainPageState extends State<RetailerMainPage> {
         actions: [
           IconButton(
             icon: const Icon(
-              Icons.notifications,
+              Icons.exit_to_app,
               color: Colors.black,
             ),
             onPressed: () async {
