@@ -14,13 +14,13 @@ class IntroPage2 extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SizedBox(
-            height: MediaQuery.of(context).size.height * 0.1,
+            height: MediaQuery.of(context).size.height * 0.15,
           ),
           Container(
-            height: MediaQuery.of(context).size.height * 0.1,
+            height: MediaQuery.of(context).size.height * 0.15,
             alignment: Alignment.center,
             child: SvgPicture.asset(
-              "assets/images/first.svg",
+              "assets/images/first2.svg",
               fit: BoxFit.contain,
             ),
           ),
