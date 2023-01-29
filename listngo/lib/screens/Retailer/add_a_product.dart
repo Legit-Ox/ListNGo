@@ -112,19 +112,6 @@ class _AddAProductState extends State<AddAProduct> {
                       ),
                     ),
                   ),
-                  // ElevatedButton(
-                  //   //if user click this button. user can upload image from camera
-                  //   onPressed: () {
-                  //     Navigator.pop(context);
-                  //     getImage(ImageSource.camera);
-                  //   },
-                  //   child: Row(
-                  //     children: const [
-                  //       Icon(Icons.camera),
-                  //       Text('From Camera'),
-                  //     ],
-                  //   ),
-                  // ),
                 ],
               ),
             ),

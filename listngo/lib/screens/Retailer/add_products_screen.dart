@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
@@ -128,19 +129,6 @@ class _AddProductsState extends State<AddProducts> {
                         ),
                       ),
                     ),
-                    // ElevatedButton(
-                    //   //if user click this button. user can upload image from camera
-                    //   onPressed: () {
-                    //     Navigator.pop(context);
-                    //     getImage(ImageSource.camera);
-                    //   },
-                    //   child: Row(
-                    //     children: const [
-                    //       Icon(Icons.camera),
-                    //       Text('From Camera'),
-                    //     ],
-                    //   ),
-                    // ),
                   ],
                 ),
               ),
@@ -204,7 +192,6 @@ class _AddProductsState extends State<AddProducts> {
                         minLines: 1,
                         maxLines: 2,
                         style: GoogleFonts.poppins(fontSize: 16),
-                        // controller: _phoneNumberController,
                         decoration: InputDecoration(
                           border: InputBorder.none,
                           hintText: 'About your shop',
@@ -264,6 +251,15 @@ class _AddProductsState extends State<AddProducts> {
                     : GestureDetector(
                         onTap: () {
                           myAlert();
+                          if (_formKey.currentState!.validate()) {
+                            _db
+                                .collection("Retailer")
+                                .doc(FirebaseAuth.instance.currentUser!.uid)
+                                .update({
+                              'shopName': _descController.text,
+                              'shopImage': image.toString(),
+                            });
+                          }
                         },
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 25),

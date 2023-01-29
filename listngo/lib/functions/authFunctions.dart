@@ -64,6 +64,31 @@ class AuthServices {
     return "Success";
   }
 
+  static logIniwthGoogle() async {
+    try {
+      final GoogleSignInAccount? googleSignInAccount =
+          await GoogleSignIn().signIn();
+
+      final GoogleSignInAuthentication googleSignInAuthentication =
+          await googleSignInAccount!.authentication;
+      final AuthCredential credentials = GoogleAuthProvider.credential(
+        accessToken: googleSignInAuthentication.accessToken,
+        idToken: googleSignInAuthentication.idToken,
+      );
+
+      UserCredential userCredential =
+          await FirebaseAuth.instance.signInWithCredential(credentials);
+    } on FirebaseAuthException catch (e) {
+      if (kDebugMode) {
+        print("WOOOPSSSS");
+        print(e.message);
+        return "";
+      }
+      rethrow;
+    }
+    return "Success";
+  }
+
   static signInwithGoogle(String type) async {
     try {
       final GoogleSignInAccount? googleSignInAccount =
