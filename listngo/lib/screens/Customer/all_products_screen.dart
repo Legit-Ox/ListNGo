@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:listngo/models/Product.dart';
-import 'package:listngo/screens/Customer/product_details_screen.dart';
 import 'package:listngo/widgets/categories.dart';
-import 'package:listngo/widgets/product_card.dart';
 import 'package:listngo/widgets/user_drawer.dart';
 
 class AllProductsScreen extends StatefulWidget {
@@ -124,28 +121,28 @@ class _AllProductsScreenState extends State<AllProductsScreen> {
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.05,
               ),
-              Center(
-                child: Wrap(
-                    spacing: 30,
-                    runSpacing: 20,
-                    alignment: WrapAlignment.spaceEvenly,
-                    runAlignment: WrapAlignment.spaceEvenly,
-                    children: List.generate(
-                        demo_product.length,
-                        (index) => ProductCard(
-                              title: demo_product[index].title,
-                              image: demo_product[index].image,
-                              price: demo_product[index].price,
-                              press: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => DetailsScreen(
-                                          product: demo_product[index]),
-                                    ));
-                              },
-                            ))),
-              ),
+              // Center(
+              //   child: Wrap(
+              //       spacing: 30,
+              //       runSpacing: 20,
+              //       alignment: WrapAlignment.spaceEvenly,
+              //       runAlignment: WrapAlignment.spaceEvenly,
+              //       children: List.generate(
+              //           demo_product.length,
+              //           (index) => ProductCard(
+              //                 title: demo_product[index].title,
+              //                 image: demo_product[index].image,
+              //                 price: demo_product[index].price,
+              //                 press: () {
+              //                   Navigator.push(
+              //                       context,
+              //                       MaterialPageRoute(
+              //                         builder: (context) => DetailsScreen(
+              //                             product: demo_product[index]),
+              //                       ));
+              //                 },
+              //               ))),
+              // ),
             ],
           ),
         ));

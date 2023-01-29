@@ -21,7 +21,7 @@ class _AddAProductState extends State<AddAProduct> {
   final _descController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   final _db = FirebaseFirestore.instance;
-  String? _url;
+  late String? _url;
   File? _image;
   List<dynamic> prods = [];
   Future<void> _getProducts() async {
@@ -52,6 +52,7 @@ class _AddAProductState extends State<AddAProduct> {
     ))
         .ref
         .getDownloadURL();
+
     setState(() {
       _url = url;
     });
@@ -402,6 +403,12 @@ class _AddAProductState extends State<AddAProduct> {
                                 }
                               ]
                       });
+                      Navigator.pop(context);
+                      // Navigator.push(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //         builder: (context) =>
+                      //             const RetailerAddDetails()));
                     } catch (e) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(

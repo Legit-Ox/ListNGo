@@ -1,11 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:listngo/constants.dart';
-import 'package:listngo/models/Product.dart';
-import 'package:listngo/screens/Customer/product_details_screen.dart';
 import 'package:listngo/screens/Retailer/add_a_product.dart';
+import 'package:listngo/screens/Retailer/retailer_product_detail_screen.dart';
 import 'package:listngo/widgets/product_card.dart';
-
 
 class RetailerAddDetails extends StatefulWidget {
   const RetailerAddDetails({super.key});
@@ -15,6 +15,38 @@ class RetailerAddDetails extends StatefulWidget {
 }
 
 class _RetailerAddDetailsState extends State<RetailerAddDetails> {
+  late List<dynamic> products = [];
+
+  Future<void> setProducts() async {
+    await FirebaseFirestore.instance
+        .collection('Retailer')
+        .doc((FirebaseAuth.instance.currentUser)!.uid)
+        .get()
+        .then((value) {
+      setState(() {
+        products = value.data()!['Products'];
+      });
+    });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    setProducts();
+    super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    setProducts();
+    super.didChangeDependencies();
+  }
+
+  String? productName;
+  String? productPrice;
+  String? productDesc;
+  String? productImgUrl;
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -204,7 +236,7 @@ class _RetailerAddDetailsState extends State<RetailerAddDetails> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Icon(
+                          const Icon(
                             Icons.add,
                             color: primaryGreen,
                           ),
@@ -225,6 +257,9 @@ class _RetailerAddDetailsState extends State<RetailerAddDetails> {
               ),
             ),
           ),
+          SizedBox(
+            height: size.height * 0.05,
+          ),
           Center(
             child: Wrap(
                 spacing: 10,
@@ -232,17 +267,21 @@ class _RetailerAddDetailsState extends State<RetailerAddDetails> {
                 alignment: WrapAlignment.spaceEvenly,
                 runAlignment: WrapAlignment.spaceEvenly,
                 children: List.generate(
-                    demo_product.length,
+                    products.length,
                     (index) => ProductCard(
-                          title: demo_product[index].title,
-                          image: demo_product[index].image,
-                          price: demo_product[index].price,
+                          title: products[index]['name'],
+                          image: products[index]['image'],
+                          price: products[index]['price'],
                           press: () {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => DetailsScreen(
-                                      product: demo_product[index]),
+                                  builder: (context) => RetailerDetailScreen(
+                                    title: products[index]['name'],
+                                    image: products[index]['image'],
+                                    price: products[index]['price'],
+                                    description: products[index]['description'],
+                                  ),
                                 ));
                           },
                         ))),
