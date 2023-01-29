@@ -29,7 +29,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
             height: size.height * 0.1,
           ),
           SizedBox(
-            height: size.height * 0.6,
+            height: size.height * 0.7,
             child: PageView(
               onPageChanged: (value) {
                 setState(() {

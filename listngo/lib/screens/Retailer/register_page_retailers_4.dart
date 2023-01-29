@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
@@ -23,7 +24,8 @@ class _RegisterPageRetailers4State extends State<RegisterPageRetailers4> {
   final _formKey = GlobalKey<FormState>();
   final _db = FirebaseFirestore.instance;
   final picker = ImagePicker();
-
+  File? _image;
+  late String? _url;
   final roles = [
     'Stationary',
     'General Stores',
@@ -33,14 +35,6 @@ class _RegisterPageRetailers4State extends State<RegisterPageRetailers4> {
   ];
   String? selectedValue1;
   bool isRoleOthers = false;
-  XFile? image;
-  Future getImage(ImageSource media) async {
-    var img = await picker.pickImage(source: media);
-
-    setState(() {
-      image = img;
-    });
-  }
 
   void myAlert() {
     showDialog(
@@ -138,6 +132,37 @@ class _RegisterPageRetailers4State extends State<RegisterPageRetailers4> {
         });
   }
 
+  Future UpdateURL() async {
+    // create a reference to the location you want to upload to
+    var imageRef =
+        FirebaseStorage.instance.ref().child("${DateTime.now()}.jpg");
+
+    // upload the file
+    var uploadTask = imageRef.putFile(_image!);
+
+    // Wait until the upload completes
+    var url = await (await uploadTask.whenComplete(
+      () {
+        return null;
+      },
+    ))
+        .ref
+        .getDownloadURL();
+
+    setState(() {
+      _url = url;
+    });
+  }
+
+  Future getImage(ImageSource media) async {
+    var img = await picker.getImage(source: media);
+    final File image = File(img!.path);
+    setState(() {
+      _image = image;
+      UpdateURL();
+    });
+  }
+
   @override
   void dispose() {
     _descController.dispose();
@@ -160,7 +185,7 @@ class _RegisterPageRetailers4State extends State<RegisterPageRetailers4> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                image == null
+                _image == null
                     ? SizedBox(
                         height: size.height * 0.1,
                       )
@@ -270,7 +295,7 @@ class _RegisterPageRetailers4State extends State<RegisterPageRetailers4> {
                               width: size.width * 0.05,
                             ),
                             Text(
-                              image == null
+                              _image == null
                                   ? 'Image of your shop'
                                   : 'Change the image',
                               style: GoogleFonts.poppins(
@@ -287,14 +312,14 @@ class _RegisterPageRetailers4State extends State<RegisterPageRetailers4> {
                 ),
                 //if image not null show the image
                 //if image null show text
-                image != null
+                _image != null
                     ? Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(8),
                           child: Image.file(
                             //to show image, you type like this.
-                            File(image!.path),
+                            File(_image!.path),
                             fit: BoxFit.cover,
                             width: MediaQuery.of(context).size.width,
                             height: 300,
@@ -316,47 +341,47 @@ class _RegisterPageRetailers4State extends State<RegisterPageRetailers4> {
                 //   ),
                 // ),
 
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const AddAProduct(),
-                      ),
-                    );
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 25),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: Colors.grey[200],
-                        border: Border.all(color: Colors.white),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 16, vertical: 16),
-                        child: Row(
-                          children: [
-                            const Icon(Icons.add_box_sharp,
-                                size: 16, color: Colors.black54),
-                            SizedBox(
-                              width: size.width * 0.05,
-                            ),
-                            Text(
-                              'Add a product',
-                              style: GoogleFonts.poppins(
-                                  fontSize: 16, color: Colors.black54),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: size.height * 0.02,
-                ),
+                // GestureDetector(
+                //   onTap: () {
+                //     Navigator.push(
+                //       context,
+                //       MaterialPageRoute(
+                //         builder: (context) => const AddAProduct(),
+                //       ),
+                //     );
+                //   },
+                //   child: Padding(
+                //     padding: const EdgeInsets.symmetric(horizontal: 25),
+                //     child: Container(
+                //       decoration: BoxDecoration(
+                //         color: Colors.grey[200],
+                //         border: Border.all(color: Colors.white),
+                //         borderRadius: BorderRadius.circular(12),
+                //       ),
+                //       child: Padding(
+                //         padding: const EdgeInsets.symmetric(
+                //             horizontal: 16, vertical: 16),
+                //         child: Row(
+                //           children: [
+                //             const Icon(Icons.add_box_sharp,
+                //                 size: 16, color: Colors.black54),
+                //             SizedBox(
+                //               width: size.width * 0.05,
+                //             ),
+                //             Text(
+                //               'Add a product',
+                //               style: GoogleFonts.poppins(
+                //                   fontSize: 16, color: Colors.black54),
+                //             ),
+                //           ],
+                //         ),
+                //       ),
+                //     ),
+                //   ),
+                // ),
+                // SizedBox(
+                //   height: size.height * 0.02,
+                // ),
                 GestureDetector(
                   onTap: () {
                     if (_formKey.currentState!.validate()) {
@@ -365,6 +390,7 @@ class _RegisterPageRetailers4State extends State<RegisterPageRetailers4> {
                           .doc(FirebaseAuth.instance.currentUser!.uid)
                           .update({
                         'description': _descController.text.trim(),
+                        'shopImage': _url,
                       });
                       Navigator.push(
                         context,

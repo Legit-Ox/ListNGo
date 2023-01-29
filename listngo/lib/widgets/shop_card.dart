@@ -10,12 +10,9 @@ class ShopCard extends StatelessWidget {
     required this.type,
     required this.location,
     required this.press,
-    required this.bgColor,
   }) : super(key: key);
   final String image, name, type, location;
   final VoidCallback press;
-
-  final Color bgColor;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +23,7 @@ class ShopCard extends StatelessWidget {
         width: MediaQuery.of(context).size.width * 0.9,
         decoration: BoxDecoration(
           color: secondaryPurpleTint.withOpacity(0.3),
-          borderRadius: BorderRadius.all(Radius.circular(12)),
+          borderRadius: const BorderRadius.all(Radius.circular(12)),
         ),
         child: Column(
           children: [
@@ -36,14 +33,15 @@ class ShopCard extends StatelessWidget {
                   child: SizedBox(
                     height: MediaQuery.of(context).size.height * 0.2,
                     child: ClipRRect(
-                      borderRadius: const BorderRadius.only(
-                          topLeft: Radius.circular(12),
-                          topRight: Radius.circular(12)),
-                      child: Image.asset(
-                        image,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
+                        borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(12),
+                            topRight: Radius.circular(12)),
+                        child: image != null
+                            ? Image.network(
+                                image,
+                                fit: BoxFit.cover,
+                              )
+                            : Image.asset("assets/images/shop1.jfif")),
                   ),
                 ),
               ],

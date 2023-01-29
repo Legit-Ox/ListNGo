@@ -1,43 +1,54 @@
-import 'package:flutter/material.dart';
-import 'package:listngo/models/Shop.dart';
-import 'package:listngo/widgets/shop_card.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:flutter/material.dart';
+// import 'package:listngo/widgets/shop_card.dart';
 
+// import 'section_title.dart';
 
-import 'section_title.dart';
+// class ShopList extends StatefulWidget {
+//   const ShopList({
+//     Key? key,
+//   }) : super(key: key);
 
-class ShopList extends StatelessWidget {
-  const ShopList({
-    Key? key,
-  }) : super(key: key);
+//   @override
+//   State<ShopList> createState() => ShopListState();
+// }
 
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
-          child: SectionTitle(
-            title: "Shops",
-            pressSeeAll: () {},
-          ),
-        ),
-        Column(
-          children: List.generate(
-            demo_shop.length,
-            (index) => Padding(
-              padding: const EdgeInsets.only(bottom: 16),
-              child: ShopCard(
-                name: demo_shop[index].name,
-                image: demo_shop[index].image,
-                type: demo_shop[index].type,
-                location: demo_shop[index].location,
-                bgColor: demo_shop[index].bgColor,
-                press: () {},
-              ),
-            ),
-          ),
-        )
-      ],
-    );
-  }
-}
+// class ShopListState extends State<ShopList> {
+//   var Retailers = [];
+
+//   Future<void> setRetailers() async {
+//     CollectionReference collectionRef =
+//         FirebaseFirestore.instance.collection('Retailer');
+
+//     // Get docs from collection reference
+//     QuerySnapshot querySnapshot = await collectionRef.get();
+
+//     // Get data from docs and convert map to List
+//     for (var doc in querySnapshot.docs) {
+//       var data = doc.data();
+//       Retailers.add(doc);
+//     }
+
+//     print(Retailers);
+//     setState(() {
+//       Retailers = Retailers;
+//     });
+//     // print(allData);
+//   }
+
+//   // @override
+//   // void initState() {
+//   //   // TODO: implement initState
+//   //   setRetailers();
+//   //   super.initState();
+//   // }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Column(
+//       children: [
+        
+//       ],
+//     );
+//   }
+// }

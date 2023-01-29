@@ -6,11 +6,12 @@ class ProductCard extends StatelessWidget {
   const ProductCard({
     Key? key,
     required this.image,
-    required this.title,
+    required this.name,
     required this.price,
     required this.press,
+    required this.description,
   }) : super(key: key);
-  final String image, title, price;
+  final String image, name, price, description;
   final VoidCallback press;
 
   @override
@@ -43,7 +44,7 @@ class ProductCard extends StatelessWidget {
               children: [
                 Expanded(
                   child: Text(
-                    '$title\n',
+                    '$name\n',
                     style: GoogleFonts.poppins(color: Colors.black),
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,

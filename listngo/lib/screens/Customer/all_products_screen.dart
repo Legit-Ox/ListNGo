@@ -1,7 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:listngo/screens/Customer/product_details_screen.dart';
 import 'package:listngo/widgets/categories.dart';
+import 'package:listngo/widgets/product_card.dart';
 import 'package:listngo/widgets/user_drawer.dart';
 
 class AllProductsScreen extends StatefulWidget {
@@ -18,6 +21,35 @@ const OutlineInputBorder outlineInputBorder = OutlineInputBorder(
 var _scaffoldKey = GlobalKey<ScaffoldState>();
 
 class _AllProductsScreenState extends State<AllProductsScreen> {
+  late var Retailers;
+  late var AllProducts;
+  Future<void> setProducts() async {
+    CollectionReference collectionRef =
+        FirebaseFirestore.instance.collection('Retailer');
+
+    // Get docs from collection reference
+    QuerySnapshot querySnapshot = await collectionRef.get();
+
+    // Get data from docs and convert map to List
+    var ProdList = [];
+    for (var doc in querySnapshot.docs) {
+      var data = doc.data();
+      ProdList.add(doc['Products']);
+    }
+
+    print(ProdList);
+    setState(() {
+      AllProducts = ProdList;
+    });
+    // print(allData);
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    setProducts();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,7 +75,7 @@ class _AllProductsScreenState extends State<AllProductsScreen> {
               ),
               const SizedBox(width: 10),
               Text(
-                "Shahibaug",
+                "asdasd",
                 style: GoogleFonts.poppins(color: Colors.black),
               ),
             ],
@@ -121,28 +153,34 @@ class _AllProductsScreenState extends State<AllProductsScreen> {
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.05,
               ),
-              // Center(
-              //   child: Wrap(
-              //       spacing: 30,
-              //       runSpacing: 20,
-              //       alignment: WrapAlignment.spaceEvenly,
-              //       runAlignment: WrapAlignment.spaceEvenly,
-              //       children: List.generate(
-              //           demo_product.length,
-              //           (index) => ProductCard(
-              //                 title: demo_product[index].title,
-              //                 image: demo_product[index].image,
-              //                 price: demo_product[index].price,
-              //                 press: () {
-              //                   Navigator.push(
-              //                       context,
-              //                       MaterialPageRoute(
-              //                         builder: (context) => DetailsScreen(
-              //                             product: demo_product[index]),
-              //                       ));
-              //                 },
-              //               ))),
-              // ),
+              Center(
+                child: Wrap(
+                    spacing: 30,
+                    runSpacing: 20,
+                    alignment: WrapAlignment.spaceEvenly,
+                    runAlignment: WrapAlignment.spaceEvenly,
+                    children: List.generate(
+                        AllProducts.length,
+                        (index) => ProductCard(
+                              name: AllProducts[index][0]['name'],
+                              image: AllProducts[index][0]['image'],
+                              price: AllProducts[index][0]['price'],
+                              description: AllProducts[index][0]['description'],
+                              press: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => DetailsScreen(
+                                        name: AllProducts[index][0]['name'],
+                                        image: AllProducts[index][0]['image'],
+                                        price: AllProducts[index][0]['price'],
+                                        description: AllProducts[0][index]
+                                            ['description'],
+                                      ),
+                                    ));
+                              },
+                            ))),
+              ),
             ],
           ),
         ));
