@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:listngo/constants.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 class AddAProduct extends StatefulWidget {
   const AddAProduct({Key? key}) : super(key: key);
@@ -20,6 +21,8 @@ class _AddAProductState extends State<AddAProduct> {
   final _descController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   final _db = FirebaseFirestore.instance;
+  String? _url;
+  File? _image;
   List<dynamic> prods = [];
   Future<void> _getProducts() async {
     await FirebaseFirestore.instance
@@ -33,13 +36,35 @@ class _AddAProductState extends State<AddAProduct> {
     });
   }
 
-  bool isRoleOthers = false;
-  XFile? image;
-  Future getImage(ImageSource media) async {
-    var img = await picker.pickImage(source: media);
+  Future UpdateURL() async {
+    // create a reference to the location you want to upload to
+    var imageRef =
+        FirebaseStorage.instance.ref().child("${DateTime.now()}.jpg");
 
+    // upload the file
+    var uploadTask = imageRef.putFile(_image!);
+
+    // Wait until the upload completes
+    var url = await (await uploadTask.whenComplete(
+      () {
+        return null;
+      },
+    ))
+        .ref
+        .getDownloadURL();
     setState(() {
-      image = img;
+      _url = url;
+    });
+  }
+
+  bool isRoleOthers = false;
+
+  Future getImage(ImageSource media) async {
+    var img = await picker.getImage(source: media);
+    final File image = File(img!.path);
+    setState(() {
+      _image = image;
+      UpdateURL();
     });
   }
 
@@ -56,81 +81,83 @@ class _AddAProductState extends State<AddAProduct> {
             ),
             content: SizedBox(
               height: MediaQuery.of(context).size.height / 6,
-              child: Column(
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pop(context);
-                      getImage(ImageSource.gallery);
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 10, vertical: 10),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Colors.grey[200],
-                          border: Border.all(color: Colors.white),
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 16, vertical: 8),
-                          child: Row(
-                            children: [
-                              const Icon(
-                                Icons.add_a_photo,
-                                size: 16,
-                              ),
-                              const SizedBox(
-                                width: 10,
-                              ),
-                              Text(
-                                'From Gallery',
-                                style: GoogleFonts.poppins(fontSize: 16),
-                              ),
-                            ],
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.pop(context);
+                        getImage(ImageSource.gallery);
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 10, vertical: 10),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Colors.grey[200],
+                            border: Border.all(color: Colors.white),
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 16, vertical: 8),
+                            child: Row(
+                              children: [
+                                const Icon(
+                                  Icons.add_a_photo,
+                                  size: 16,
+                                ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                Text(
+                                  'From Gallery',
+                                  style: GoogleFonts.poppins(fontSize: 16),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pop(context);
-                      getImage(ImageSource.camera);
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 10, vertical: 10),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Colors.grey[200],
-                          border: Border.all(color: Colors.white),
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 16, vertical: 8),
-                          child: Row(
-                            children: [
-                              const Icon(
-                                Icons.add_a_photo,
-                                size: 16,
-                              ),
-                              const SizedBox(
-                                width: 10,
-                              ),
-                              Text(
-                                'From Camera',
-                                style: GoogleFonts.poppins(fontSize: 16),
-                              ),
-                            ],
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.pop(context);
+                        getImage(ImageSource.camera);
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 10, vertical: 10),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Colors.grey[200],
+                            border: Border.all(color: Colors.white),
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 16, vertical: 8),
+                            child: Row(
+                              children: [
+                                const Icon(
+                                  Icons.add_a_photo,
+                                  size: 16,
+                                ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                Text(
+                                  'From Camera',
+                                  style: GoogleFonts.poppins(fontSize: 16),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           );
@@ -330,14 +357,14 @@ class _AddAProductState extends State<AddAProduct> {
                 ),
                 //if image not null show the image
                 //if image null show text
-                image != null
+                _image != null
                     ? Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(8),
                           child: Image.file(
                             //to show image, you type like this.
-                            File(image!.path),
+                            File(_image!.path),
                             fit: BoxFit.cover,
                             width: MediaQuery.of(context).size.width,
                             height: 300,
@@ -356,14 +383,24 @@ class _AddAProductState extends State<AddAProduct> {
                           .collection('Retailer')
                           .doc(FirebaseAuth.instance.currentUser!.uid)
                           .update({
-                        "Products": prods +
-                            [
-                              {
-                                'name': _nameController.text,
-                                'price': _priceController.text,
-                                'description': _descController.text,
-                              }
-                            ]
+                        "Products": prods.isNotEmpty
+                            ? prods +
+                                [
+                                  {
+                                    'name': _nameController.text.trim(),
+                                    'price': _priceController.text.trim(),
+                                    'description': _descController.text.trim(),
+                                    'image': _url
+                                  }
+                                ]
+                            : [
+                                {
+                                  'name': _nameController.text.trim(),
+                                  'price': _priceController.text.trim(),
+                                  'description': _descController.text.trim(),
+                                  'image': _url
+                                }
+                              ]
                       });
                     } catch (e) {
                       ScaffoldMessenger.of(context).showSnackBar(
