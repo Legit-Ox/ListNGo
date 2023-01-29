@@ -13,6 +13,7 @@ class CustomTextField extends StatelessWidget {
     this.padding,
     this.obscureText,
     this.suffixIcon,
+    this.labelText,
   }) : super(key: key);
   final Function? onChanged;
   final Function? validator;
@@ -24,6 +25,7 @@ class CustomTextField extends StatelessWidget {
   final EdgeInsets? margin;
   final EdgeInsets? padding;
   final bool? obscureText;
+  final String? labelText;
 
   @override
   Widget build(BuildContext context) {
@@ -50,6 +52,8 @@ class CustomTextField extends StatelessWidget {
             controller: controller,
             style: GoogleFonts.poppins(fontSize: 16),
             decoration: InputDecoration(
+              labelText: labelText,
+              alignLabelWithHint: true,
               border: InputBorder.none,
               prefixIcon: prefixIcon,
               suffixIcon: suffixIcon,

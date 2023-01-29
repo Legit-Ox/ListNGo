@@ -1,6 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:listngo/constants.dart';
+import 'package:listngo/functions/authFunctions.dart';
 import 'package:listngo/screens/Retailer/retailer_add_details.dart';
 import 'package:listngo/screens/Retailer/retailer_dashboard.dart';
 import 'package:listngo/screens/Retailer/retailer_stats.dart';
@@ -14,12 +17,37 @@ class RetailerMainPage extends StatefulWidget {
 
 class _RetailerMainPageState extends State<RetailerMainPage> {
   int pageIndex = 0;
+  late String? getName = "";
+  late String? getType = "";
 
   final List<StatefulWidget> pages = [
     const RetailerDashboard(),
     const RetailerAddDetails(),
     const RetailerStats(),
   ];
+
+  Future<void> _getShopName() async {
+    await FirebaseFirestore.instance
+        .collection('Retailer')
+        .doc((FirebaseAuth.instance.currentUser)!.uid)
+        .get()
+        .then((value) {
+      print(value.data()!['shopName'].toString());
+      setState(() {
+        getName = value.data()!['shopName'].toString().length > 10
+            ? "${value.data()!['shopName'].toString().substring(0, 10)}..."
+            : value.data()!['shopName'].toString();
+      });
+    });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+
+    _getShopName();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +64,7 @@ class _RetailerMainPageState extends State<RetailerMainPage> {
             ),
             const SizedBox(width: 10),
             Text(
-              "Jitendra Stores",
+              getName.toString(),
               style: GoogleFonts.poppins(color: Colors.black),
             ),
           ],
@@ -47,7 +75,9 @@ class _RetailerMainPageState extends State<RetailerMainPage> {
               Icons.notifications,
               color: Colors.black,
             ),
-            onPressed: () {},
+            onPressed: () async {
+              await AuthServices.signOut(context);
+            },
           ),
         ],
       ),

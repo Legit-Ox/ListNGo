@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:listngo/constants.dart';
 import 'package:listngo/models/Product.dart';
 import 'package:listngo/screens/Customer/product_details_screen.dart';
 import 'package:listngo/widgets/categories.dart';
 import 'package:listngo/widgets/product_card.dart';
+import 'package:listngo/widgets/user_drawer.dart';
 
 class AllProductsScreen extends StatefulWidget {
   const AllProductsScreen({super.key});
@@ -18,15 +18,20 @@ const OutlineInputBorder outlineInputBorder = OutlineInputBorder(
   borderRadius: BorderRadius.all(Radius.circular(12)),
   borderSide: BorderSide.none,
 );
+var _scaffoldKey = GlobalKey<ScaffoldState>();
 
 class _AllProductsScreenState extends State<AllProductsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        key: _scaffoldKey,
+        drawer: const drawerWidget(),
         appBar: AppBar(
-          backgroundColor: Color.fromARGB(255, 255, 255, 255),
+          backgroundColor: const Color.fromARGB(255, 255, 255, 255),
           leading: IconButton(
-            onPressed: () {},
+            onPressed: () {
+              _scaffoldKey.currentState!.openDrawer();
+            },
             icon: SvgPicture.asset(
               "assets/icons/menu.svg",
               color: Colors.black,
@@ -56,7 +61,7 @@ class _AllProductsScreenState extends State<AllProductsScreen> {
             ),
           ],
         ),
-        backgroundColor: Color.fromARGB(255, 255, 255, 255),
+        backgroundColor: const Color.fromARGB(255, 255, 255, 255),
         body: SingleChildScrollView(
           physics: const BouncingScrollPhysics(
               parent: AlwaysScrollableScrollPhysics()),
@@ -78,9 +83,9 @@ class _AllProductsScreenState extends State<AllProductsScreen> {
                 height: MediaQuery.of(context).size.height * 0.02,
               ),
               Container(
-                margin: EdgeInsets.symmetric(horizontal: 5),
+                margin: const EdgeInsets.symmetric(horizontal: 5),
                 decoration: BoxDecoration(
-                    boxShadow: [
+                    boxShadow: const [
                       BoxShadow(
                         color: Colors.black,
                         offset: Offset(4, 4),
@@ -115,13 +120,13 @@ class _AllProductsScreenState extends State<AllProductsScreen> {
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.05,
               ),
-              Categories(),
+              const Categories(),
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.05,
               ),
               Center(
                 child: Wrap(
-                    spacing: 50,
+                    spacing: 30,
                     runSpacing: 20,
                     alignment: WrapAlignment.spaceEvenly,
                     runAlignment: WrapAlignment.spaceEvenly,
