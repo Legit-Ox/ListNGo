@@ -60,7 +60,7 @@ class _RetailerMainPageState extends State<RetailerMainPage> {
           children: [
             const Icon(
               Icons.store,
-              color: Colors.black,
+              color: primaryPurple,
             ),
             const SizedBox(width: 10),
             Text(
@@ -90,7 +90,7 @@ class _RetailerMainPageState extends State<RetailerMainPage> {
     return Container(
       height: 74,
       decoration: const BoxDecoration(
-        color: primaryGreen,
+        color: primaryPurple,
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(20),
           topRight: Radius.circular(20),
