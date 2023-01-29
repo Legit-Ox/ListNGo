@@ -72,7 +72,7 @@ class _RetailerAddDetailsState extends State<RetailerAddDetails> {
             padding: const EdgeInsets.symmetric(horizontal: 25),
             child: Container(
               decoration: BoxDecoration(
-                color: Colors.grey[200],
+                color: secondaryPurpleTint,
                 border: Border.all(color: Colors.white),
                 borderRadius: BorderRadius.circular(12),
               ),
@@ -111,7 +111,7 @@ class _RetailerAddDetailsState extends State<RetailerAddDetails> {
             padding: const EdgeInsets.symmetric(horizontal: 25),
             child: Container(
               decoration: BoxDecoration(
-                color: Colors.grey[200],
+                color: secondaryPurpleTint,
                 border: Border.all(color: Colors.white),
                 borderRadius: BorderRadius.circular(12),
               ),
@@ -150,7 +150,7 @@ class _RetailerAddDetailsState extends State<RetailerAddDetails> {
             padding: const EdgeInsets.symmetric(horizontal: 25),
             child: Container(
               decoration: BoxDecoration(
-                color: Colors.grey[200],
+                color: secondaryPurpleTint,
                 border: Border.all(color: Colors.white),
                 borderRadius: BorderRadius.circular(12),
               ),
@@ -189,7 +189,7 @@ class _RetailerAddDetailsState extends State<RetailerAddDetails> {
             padding: const EdgeInsets.symmetric(horizontal: 25),
             child: Container(
               decoration: BoxDecoration(
-                color: Colors.grey[200],
+                color: secondaryPurpleTint,
                 border: Border.all(color: Colors.white),
                 borderRadius: BorderRadius.circular(12),
               ),
@@ -230,7 +230,7 @@ class _RetailerAddDetailsState extends State<RetailerAddDetails> {
                     child: Container(
                       decoration: BoxDecoration(
                         color: Colors.white,
-                        border: Border.all(color: primaryGreen, width: 2),
+                        border: Border.all(color: primaryPurple, width: 2),
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Row(
@@ -238,7 +238,7 @@ class _RetailerAddDetailsState extends State<RetailerAddDetails> {
                         children: [
                           const Icon(
                             Icons.add,
-                            color: primaryGreen,
+                            color: primaryPurple,
                           ),
                           Padding(
                             padding: const EdgeInsets.symmetric(
@@ -246,7 +246,7 @@ class _RetailerAddDetailsState extends State<RetailerAddDetails> {
                             child: Text(
                               'Add product',
                               style: GoogleFonts.poppins(
-                                  fontSize: 18, color: primaryGreen),
+                                  fontSize: 18, color: primaryPurple),
                             ),
                           ),
                         ],

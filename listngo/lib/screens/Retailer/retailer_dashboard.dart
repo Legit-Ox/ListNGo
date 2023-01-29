@@ -189,23 +189,14 @@ class _RetailerDashboardState extends State<RetailerDashboard> {
             SizedBox(
               height: size.height * 0.01,
             ),
-            Container(
-              padding: const EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 225, 225, 225),
-                  borderRadius: BorderRadius.circular(10)),
-              child: Text(
-                'Jitendra Stores, 3rd floor, Shubh Complex, Shahibaug, Ahmedabad,380004',
-                style: GoogleFonts.poppins(fontSize: 16),
-              ),
-            ),
+           
             SizedBox(
               height: size.height * 0.01,
             ),
             Text(
               'About',
               style: GoogleFonts.poppins(
-                  fontSize: 18, color: const Color.fromARGB(255, 90, 90, 90)),
+                  fontSize: 18, color: const Color.fromARGB(255, 146, 146, 146) ),
             ),
             const Divider(
               thickness: 2,
