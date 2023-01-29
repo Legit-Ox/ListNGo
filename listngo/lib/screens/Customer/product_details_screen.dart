@@ -6,12 +6,12 @@ class DetailsScreen extends StatelessWidget {
   const DetailsScreen(
       {Key? key,
       required this.image,
-      required this.title,
+      required this.name,
       required this.price,
       required this.description})
       : super(key: key);
 
-  final String image, title, price, description;
+  final String image, name, price, description;
 
   @override
   Widget build(BuildContext context) {
@@ -57,12 +57,12 @@ class DetailsScreen extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      Expanded(
-                        child: Text(
-                          title,
-                          style: Theme.of(context).textTheme.titleLarge,
-                        ),
-                      ),
+                      // Expanded(
+                      //   child: Text(
+                      //     headline6,
+                      //     style: Theme.of(context).textTheme.titleLarge,
+                      //   ),
+                      // ),
                       const SizedBox(width: 16),
                       Text(
                         "\$$price",

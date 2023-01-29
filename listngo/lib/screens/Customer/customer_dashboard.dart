@@ -3,17 +3,15 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:listngo/constants.dart';
 import 'package:listngo/functions/authFunctions.dart';
+import 'package:listngo/screens/Customer/shop_detail_screen.dart';
 import 'package:listngo/widgets/categories.dart';
 import 'package:listngo/widgets/image_slider_images.dart';
-import 'package:listngo/widgets/products_list.dart';
-import 'package:listngo/widgets/shops_list.dart';
+import 'package:listngo/widgets/section_title.dart';
+import 'package:listngo/widgets/shop_card.dart';
 import 'package:listngo/widgets/user_drawer.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../utilities/Location.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class CustomerDashboardScreen extends StatefulWidget {
   const CustomerDashboardScreen({super.key});
@@ -39,7 +37,30 @@ class _CustomerDashboardScreenState extends State<CustomerDashboardScreen> {
   void initState() {
     getCurrentLocation(context);
     _getFutureAddress();
+    setRetailers();
     super.initState();
+  }
+
+  late var Retailers = [];
+
+  Future<void> setRetailers() async {
+    CollectionReference collectionRef =
+        FirebaseFirestore.instance.collection('Retailer');
+
+    // Get docs from collection reference
+    QuerySnapshot querySnapshot = await collectionRef.get();
+
+    // Get data from docs and convert map to List
+    for (var doc in querySnapshot.docs) {
+      var data = doc.data();
+      Retailers.add(data);
+    }
+
+    print(Retailers);
+    setState(() {
+      Retailers = Retailers;
+    });
+    // print(allData);
   }
 
   Future<void> _getFutureAddress() async {
@@ -275,8 +296,44 @@ class _CustomerDashboardScreenState extends State<CustomerDashboardScreen> {
                   ),
                 ),
               ),
-              const ProductsList(),
-              const ShopList(),
+              // const ProductsList(),
+
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+                child: SectionTitle(
+                  title: "Shops",
+                  pressSeeAll: () {},
+                ),
+              ),
+              Column(
+                children: List.generate(
+                  Retailers.length,
+                  (index) => Padding(
+                    padding: const EdgeInsets.only(bottom: 16),
+                    child: ShopCard(
+                      name: Retailers[index]['shopName'],
+                      image: Retailers[index]['shopImage'],
+                      type: Retailers[index]['type'],
+                      location: Retailers[index]['location'],
+                      press: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ShopDetailScreen(
+                                      name: Retailers[index]['shopName'],
+                                      image: Retailers[index]['shopImage'],
+                                      type: Retailers[index]['type'],
+                                      location: Retailers[index]['location'],
+                                      products: Retailers[index]['Products'],
+                                      description: Retailers[index]
+                                          ['description'],
+                                    )));
+                      },
+                    ),
+                  ),
+                ),
+              )
             ])));
   }
 }
