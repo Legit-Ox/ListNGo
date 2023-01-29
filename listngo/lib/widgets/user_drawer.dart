@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:listngo/screens/Customer/all_products_screen.dart';
+import 'package:listngo/screens/Customer/customer_dashboard.dart';
 
 class drawerWidget extends StatefulWidget {
   const drawerWidget({Key? key}) : super(key: key);
@@ -27,14 +29,14 @@ class _drawerWidgetState extends State<drawerWidget> {
 
           child: ListView(
             padding: EdgeInsets.zero,
-            children: const [
-              DrawerHeader(
+            children: [
+              const DrawerHeader(
                 padding: EdgeInsets.zero,
                 child: UserAccountsDrawerHeader(
                   margin: EdgeInsets.zero,
 
                   decoration:
-                      BoxDecoration(color: Color.fromARGB(255, 168, 164, 250)),
+                      BoxDecoration(color: Color.fromARGB(255, 188, 184, 252)),
                   // Color.fromARGB(255, 108, 99, 255)
                   accountName: Text("User Name"),
                   accountEmail: Text("user@gmail.com"),
@@ -45,26 +47,42 @@ class _drawerWidgetState extends State<drawerWidget> {
                 ),
               ),
               ListTile(
-                leading: Icon(
+                onTap: () {
+                  Navigator.pop(context);
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (_) => const CustomerDashboardScreen()));
+                },
+                leading: const Icon(
                   CupertinoIcons.home,
                   color: Color.fromARGB(255, 0, 3, 1),
                 ),
-                title: Text(
+                title: const Text(
                   "Home",
                   style: TextStyle(color: Colors.black),
                 ),
               ),
               ListTile(
-                leading: Icon(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const AllProductsScreen(),
+                    ),
+                  );
+                },
+                selectedColor: const Color.fromARGB(255, 177, 172, 255),
+                leading: const Icon(
                   CupertinoIcons.profile_circled,
                   color: Color.fromARGB(255, 0, 3, 1),
                 ),
-                title: Text(
-                  "Profile",
+                title: const Text(
+                  "Products",
                   style: TextStyle(color: Colors.black),
                 ),
               ),
-              ListTile(
+              const ListTile(
                 leading: Icon(
                   CupertinoIcons.heart,
                   color: Color.fromARGB(255, 0, 3, 1),
@@ -74,7 +92,7 @@ class _drawerWidgetState extends State<drawerWidget> {
                   style: TextStyle(color: Colors.black),
                 ),
               ),
-              ListTile(
+              const ListTile(
                 leading: Icon(
                   CupertinoIcons.cart,
                   color: Color.fromARGB(255, 0, 3, 1),
@@ -84,7 +102,7 @@ class _drawerWidgetState extends State<drawerWidget> {
                   style: TextStyle(color: Colors.black),
                 ),
               ),
-              ListTile(
+              const ListTile(
                 leading: Icon(
                   CupertinoIcons.arrow_down_right_arrow_up_left,
                   color: Color.fromARGB(255, 0, 3, 1),
@@ -94,7 +112,7 @@ class _drawerWidgetState extends State<drawerWidget> {
                   style: TextStyle(color: Colors.black),
                 ),
               ),
-              ListTile(
+              const ListTile(
                 leading: Icon(
                   CupertinoIcons.pencil_ellipsis_rectangle,
                   color: Color.fromARGB(255, 0, 3, 1),

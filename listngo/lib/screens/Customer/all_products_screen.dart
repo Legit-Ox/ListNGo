@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:listngo/constants.dart';
 import 'package:listngo/models/Product.dart';
 import 'package:listngo/screens/Customer/product_details_screen.dart';
+import 'package:listngo/widgets/categories.dart';
 import 'package:listngo/widgets/product_card.dart';
-
+import 'package:listngo/widgets/user_drawer.dart';
 
 class AllProductsScreen extends StatefulWidget {
   const AllProductsScreen({super.key});
@@ -18,15 +18,20 @@ const OutlineInputBorder outlineInputBorder = OutlineInputBorder(
   borderRadius: BorderRadius.all(Radius.circular(12)),
   borderSide: BorderSide.none,
 );
+var _scaffoldKey = GlobalKey<ScaffoldState>();
 
 class _AllProductsScreenState extends State<AllProductsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        key: _scaffoldKey,
+        drawer: const drawerWidget(),
         appBar: AppBar(
-          backgroundColor: const Color.fromARGB(255, 234, 234, 234),
+          backgroundColor: const Color.fromARGB(255, 255, 255, 255),
           leading: IconButton(
-            onPressed: () {},
+            onPressed: () {
+              _scaffoldKey.currentState!.openDrawer();
+            },
             icon: SvgPicture.asset(
               "assets/icons/menu.svg",
               color: Colors.black,
@@ -56,7 +61,7 @@ class _AllProductsScreenState extends State<AllProductsScreen> {
             ),
           ],
         ),
-        backgroundColor: const Color.fromARGB(255, 238, 238, 238),
+        backgroundColor: const Color.fromARGB(255, 255, 255, 255),
         body: SingleChildScrollView(
           physics: const BouncingScrollPhysics(
               parent: AlwaysScrollableScrollPhysics()),
@@ -64,65 +69,64 @@ class _AllProductsScreenState extends State<AllProductsScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                "Products",
-                style: GoogleFonts.poppins(
-                    fontWeight: FontWeight.w500,
-                    color: Colors.black,
-                    fontSize: 24),
-              ),
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                child: Row(
-                  children: [
-                    Flexible(
-                      flex: 5,
-                      child: Form(
-                        child: TextFormField(
-                          onSaved: (value) {},
-                          decoration: const InputDecoration(
-                            filled: true,
-                            fillColor: Color(0xFFF8F9F8),
-                            hintText: "Search items...",
-                            border: OutlineInputBorder(),
-                            enabledBorder: outlineInputBorder,
-                            focusedBorder: outlineInputBorder,
-                            errorBorder: outlineInputBorder,
-                            prefixIcon: Padding(
-                                padding: EdgeInsets.all(14),
-                                child: Icon(
-                                  Icons.search,
-                                  color: Color.fromARGB(255, 95, 95, 95),
-                                )),
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    Flexible(
-                      flex: 1,
-                      child: Container(
-                        child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              padding: const EdgeInsets.all(14),
-                              backgroundColor: primaryGreen,
-                              shape: const RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(12)),
-                              ),
-                            ),
-                            onPressed: () {},
-                            child: const Center(child: Icon(Icons.dashboard))),
-                      ),
-                    ),
-                  ],
+                padding: const EdgeInsets.symmetric(horizontal: 6.0),
+                child: Text(
+                  "Products",
+                  style: GoogleFonts.poppins(
+                      fontWeight: FontWeight.w500,
+                      color: Colors.black,
+                      fontSize: 24),
                 ),
+              ),
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.02,
+              ),
+              Container(
+                margin: const EdgeInsets.symmetric(horizontal: 5),
+                decoration: BoxDecoration(
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Colors.black,
+                        offset: Offset(4, 4),
+                      )
+                    ],
+                    border: Border.all(width: 1, color: Colors.black),
+                    borderRadius: BorderRadius.circular(10)),
+                // padding: const EdgeInsets.symmetric(vertical: 10),
+                child: Form(
+                  child: TextFormField(
+                    onSaved: (value) {},
+                    decoration: const InputDecoration(
+                      contentPadding: EdgeInsets.all(0),
+                      filled: true,
+                      fillColor: Color.fromARGB(255, 255, 255, 255),
+                      hintText: "Search items...",
+                      border: OutlineInputBorder(
+                          gapPadding: 0, borderRadius: BorderRadius.zero),
+                      enabledBorder: outlineInputBorder,
+                      focusedBorder: outlineInputBorder,
+                      errorBorder: outlineInputBorder,
+                      prefixIcon: Padding(
+                          padding: EdgeInsets.all(14),
+                          child: Icon(
+                            Icons.search,
+                            color: Color.fromARGB(255, 95, 95, 95),
+                          )),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.05,
+              ),
+              const Categories(),
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.05,
               ),
               Center(
                 child: Wrap(
-                    spacing: 10,
+                    spacing: 30,
                     runSpacing: 20,
                     alignment: WrapAlignment.spaceEvenly,
                     runAlignment: WrapAlignment.spaceEvenly,
@@ -132,7 +136,6 @@ class _AllProductsScreenState extends State<AllProductsScreen> {
                               title: demo_product[index].title,
                               image: demo_product[index].image,
                               price: demo_product[index].price,
-                              bgColor: demo_product[index].bgColor,
                               press: () {
                                 Navigator.push(
                                     context,

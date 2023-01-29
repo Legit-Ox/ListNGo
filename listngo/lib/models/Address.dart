@@ -1,4 +1,4 @@
-class Address {
+ class Address {
   String? name;
   String? street;
   String? isoCountryCode;

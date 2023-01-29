@@ -8,15 +8,16 @@ import 'package:image_picker/image_picker.dart';
 import 'package:listngo/constants.dart';
 import 'package:listngo/screens/Retailer/add_a_product.dart';
 import 'package:listngo/screens/Retailer/retailer_main_page.dart';
+import 'package:listngo/utilities/customer_textfield.dart';
 
-class AddProducts extends StatefulWidget {
-  const AddProducts({Key? key}) : super(key: key);
+class RegisterPageRetailers4 extends StatefulWidget {
+  const RegisterPageRetailers4({Key? key}) : super(key: key);
 
   @override
-  State<AddProducts> createState() => _AddProductsState();
+  State<RegisterPageRetailers4> createState() => _RegisterPageRetailers4State();
 }
 
-class _AddProductsState extends State<AddProducts> {
+class _RegisterPageRetailers4State extends State<RegisterPageRetailers4> {
   final _descController = TextEditingController();
   final _phoneNumberController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
@@ -156,141 +157,131 @@ class _AddProductsState extends State<AddProducts> {
           child: Form(
             key: _formKey,
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(
-                  height: size.height * 0.1,
-                ),
+                image == null
+                    ? SizedBox(
+                        height: size.height * 0.1,
+                      )
+                    : Container(),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25),
                   child: Text(
-                    'Add Description',
+                    'Fill this to optimize your sales',
                     style: GoogleFonts.poppins(
-                        fontSize: 20, fontWeight: FontWeight.w500),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.grey[200],
-                      border: Border.all(color: Colors.white),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 16, vertical: 8),
-                      child: TextFormField(
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return 'Please enter your shop name';
-                          }
-                          return null;
-                        },
-                        controller: _descController,
-                        minLines: 1,
-                        maxLines: 2,
-                        style: GoogleFonts.poppins(fontSize: 16),
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          hintText: 'About your shop',
-                          hintStyle: GoogleFonts.poppins(),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: size.height * 0.02,
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25),
-                  child: Text(
-                    'Add an image',
-                    style: GoogleFonts.poppins(
-                        fontSize: 20, fontWeight: FontWeight.w500),
+                        fontSize: 25, fontWeight: FontWeight.w500),
                   ),
                 ),
 
-                image == null
-                    ? GestureDetector(
-                        onTap: () {
-                          myAlert();
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 25),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: Colors.grey[200],
-                              border: Border.all(color: Colors.white),
-                              borderRadius: BorderRadius.circular(12),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 25),
+                  child: Text(
+                    'By filling these extra details you\'ll gain more customers through our platform which will help you expand',
+                    style: GoogleFonts.poppins(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                      color: Colors.grey,
+                    ),
+                  ),
+                ),
+                // Padding(
+                //   padding: const EdgeInsets.symmetric(horizontal: 25),
+                //   child: Text(
+                //     'Add Description',
+                //     style: GoogleFonts.poppins(
+                //         fontSize: 18, fontWeight: FontWeight.w500),
+                //   ),
+                // ),
+                CustomTextField(
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Please enter some description';
+                    }
+                    return null;
+                  },
+                  controller: _descController,
+                  hintText: 'About your shop',
+                ),
+                // Padding(
+                //   padding: const EdgeInsets.symmetric(horizontal: 25),
+                //   child: Container(
+                //     decoration: BoxDecoration(
+                //       color: Colors.grey[200],
+                //       border: Border.all(color: Colors.white),
+                //       borderRadius: BorderRadius.circular(12),
+                //     ),
+                //     child: Padding(
+                //       padding: const EdgeInsets.symmetric(
+                //           horizontal: 16, vertical: 8),
+                //       child: TextFormField(
+                //         validator: (value) {
+                //           if (value!.isEmpty) {
+                //             return 'Please enter your shop name';
+                //           }
+                //           return null;
+                //         },
+                //         controller: _descController,
+                //         minLines: 1,
+                //         maxLines: 2,
+                //         style: GoogleFonts.poppins(fontSize: 16),
+                //         // controller: _phoneNumberController,
+                //         decoration: InputDecoration(
+                //           border: InputBorder.none,
+                //           hintText: 'About your shop',
+                //           hintStyle: GoogleFonts.poppins(),
+                //         ),
+                //       ),
+                //     ),
+                //   ),
+                // ),
+                SizedBox(
+                  height: size.height * 0.02,
+                ),
+                // Padding(
+                //   padding: const EdgeInsets.symmetric(horizontal: 25),
+                //   child: Text(
+                //     'Add an image',
+                //     style: GoogleFonts.poppins(
+                //         fontSize: 20, fontWeight: FontWeight.w500),
+                //   ),
+                // ),
+
+                GestureDetector(
+                  onTap: () {
+                    myAlert();
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 25),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.grey[200],
+                        border: Border.all(color: Colors.white),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 16, vertical: 16),
+                        child: Row(
+                          children: [
+                            const Icon(Icons.add_a_photo,
+                                size: 16, color: Colors.black54),
+                            SizedBox(
+                              width: size.width * 0.05,
                             ),
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 16, vertical: 8),
-                              child: Row(
-                                children: [
-                                  const Icon(
-                                    Icons.add_a_photo,
-                                    size: 16,
-                                  ),
-                                  SizedBox(
-                                    width: size.width * 0.05,
-                                  ),
-                                  Text(
-                                    'Image of your shop',
-                                    style: GoogleFonts.poppins(fontSize: 16),
-                                  ),
-                                ],
-                              ),
+                            Text(
+                              image == null
+                                  ? 'Image of your shop'
+                                  : 'Change the image',
+                              style: GoogleFonts.poppins(
+                                  fontSize: 16, color: Colors.black54),
                             ),
-                          ),
-                        ),
-                      )
-                    : GestureDetector(
-                        onTap: () {
-                          myAlert();
-                          if (_formKey.currentState!.validate()) {
-                            _db
-                                .collection("Retailer")
-                                .doc(FirebaseAuth.instance.currentUser!.uid)
-                                .update({
-                              'shopName': _descController.text,
-                              'shopImage': image.toString(),
-                            });
-                          }
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 25),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: Colors.grey[200],
-                              border: Border.all(color: Colors.white),
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 16, vertical: 8),
-                              child: Row(
-                                children: [
-                                  const Icon(
-                                    Icons.add_a_photo,
-                                    size: 16,
-                                  ),
-                                  SizedBox(
-                                    width: size.width * 0.05,
-                                  ),
-                                  Text(
-                                    'Change image',
-                                    style: GoogleFonts.poppins(fontSize: 16),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
+                          ],
                         ),
                       ),
+                    ),
+                  ),
+                ),
                 const SizedBox(
                   height: 10,
                 ),
@@ -310,18 +301,21 @@ class _AddProductsState extends State<AddProducts> {
                           ),
                         ),
                       )
-                    : Container(),
+                    : SizedBox(
+                        height: size.height * 0.02,
+                      ),
                 SizedBox(
                   height: size.height * 0.02,
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25),
-                  child: Text(
-                    'Add a product',
-                    style: GoogleFonts.poppins(
-                        fontSize: 20, fontWeight: FontWeight.w500),
-                  ),
-                ),
+                // Padding(
+                //   padding: const EdgeInsets.symmetric(horizontal: 25),
+                //   child: Text(
+                //     'Add a product',
+                //     style: GoogleFonts.poppins(
+                //         fontSize: 20, fontWeight: FontWeight.w500),
+                //   ),
+                // ),
+
                 GestureDetector(
                   onTap: () {
                     Navigator.push(
@@ -344,16 +338,15 @@ class _AddProductsState extends State<AddProducts> {
                             horizontal: 16, vertical: 16),
                         child: Row(
                           children: [
-                            const Icon(
-                              Icons.add_box_sharp,
-                              size: 16,
-                            ),
+                            const Icon(Icons.add_box_sharp,
+                                size: 16, color: Colors.black54),
                             SizedBox(
                               width: size.width * 0.05,
                             ),
                             Text(
                               'Add a product',
-                              style: GoogleFonts.poppins(fontSize: 16),
+                              style: GoogleFonts.poppins(
+                                  fontSize: 16, color: Colors.black54),
                             ),
                           ],
                         ),
@@ -366,12 +359,26 @@ class _AddProductsState extends State<AddProducts> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const RetailerMainPage(),
-                      ),
-                    );
+                    if (_formKey.currentState!.validate()) {
+                      _db
+                          .collection('Retailer')
+                          .doc(FirebaseAuth.instance.currentUser!.uid)
+                          .update({
+                        'description': _descController.text.trim(),
+                      });
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const RetailerMainPage(),
+                        ),
+                      );
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Something went wrong'),
+                        ),
+                      );
+                    }
                   },
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 25),
@@ -380,7 +387,7 @@ class _AddProductsState extends State<AddProducts> {
                         Expanded(
                           child: Container(
                             decoration: BoxDecoration(
-                              color: primaryGreen,
+                              color: primaryPurple,
                               border: Border.all(color: Colors.white),
                               borderRadius: BorderRadius.circular(12),
                             ),
