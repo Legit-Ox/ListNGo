@@ -21,6 +21,7 @@ class _RetailerDashboardState extends State<RetailerDashboard> {
   late String? getType = "";
   late String? getArea = "";
   late String? getDesc = "";
+  late String? getUrl = "";
 
   Future<void> _getShopName() async {
     await FirebaseFirestore.instance
@@ -80,9 +81,23 @@ class _RetailerDashboardState extends State<RetailerDashboard> {
     });
   }
 
+  Future<void> _getUrl() async {
+    await FirebaseFirestore.instance
+        .collection('Retailer')
+        .doc((FirebaseAuth.instance.currentUser)!.uid)
+        .get()
+        .then((value) {
+      print(value.data()!['shopImage'].toString());
+      setState(() {
+        getUrl = value.data()!['shopImage'].toString();
+      });
+    });
+  }
+
   @override
   void initState() {
     // TODO: implement initState
+    _getUrl();
     _getDesc();
     _getArea();
     _getShopType();
@@ -181,7 +196,7 @@ class _RetailerDashboardState extends State<RetailerDashboard> {
                   flex: 1,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(10),
-                    child: Image.asset('assets/images/shop1.jfif'),
+                    child: Image.network(getUrl.toString()),
                   ),
                 ),
               ],

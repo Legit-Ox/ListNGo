@@ -14,6 +14,7 @@ class CustomTextField extends StatelessWidget {
     this.obscureText,
     this.suffixIcon,
     this.labelText,
+    this.initialValue,
   }) : super(key: key);
   final Function? onChanged;
   final Function? validator;
@@ -26,6 +27,7 @@ class CustomTextField extends StatelessWidget {
   final EdgeInsets? padding;
   final bool? obscureText;
   final String? labelText;
+  final String? initialValue;
 
   @override
   Widget build(BuildContext context) {
@@ -46,6 +48,7 @@ class CustomTextField extends StatelessWidget {
           padding: padding ??
               const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           child: TextFormField(
+            initialValue: initialValue,
             obscureText: obscureText ?? false,
             validator: ((value) =>
                 (validator != null ? validator!(value) : null)),
