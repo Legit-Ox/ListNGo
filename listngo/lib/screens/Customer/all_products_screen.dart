@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -22,7 +23,8 @@ var _scaffoldKey = GlobalKey<ScaffoldState>();
 
 class _AllProductsScreenState extends State<AllProductsScreen> {
   late var Retailers;
-  late var AllProducts;
+  late var AllProducts = [];
+  late String? getAddress = "";
   Future<void> setProducts() async {
     CollectionReference collectionRef =
         FirebaseFirestore.instance.collection('Retailer');
@@ -44,9 +46,25 @@ class _AllProductsScreenState extends State<AllProductsScreen> {
     // print(allData);
   }
 
+  Future<void> _getFutureAddress() async {
+    FirebaseFirestore.instance
+        .collection('Customer')
+        .doc((FirebaseAuth.instance.currentUser)!.uid)
+        .get()
+        .then((value) {
+      print(value.data()!['address'][2].toString());
+      setState(() {
+        getAddress = value.data()!['address'][2].toString().length > 10
+            ? "${value.data()!['address'][2].toString().substring(0, 10)}..."
+            : value.data()!['address'][2].toString();
+      });
+    });
+  }
+
   @override
   void initState() {
     // TODO: implement initState
+    _getFutureAddress();
     setProducts();
   }
 
@@ -75,7 +93,7 @@ class _AllProductsScreenState extends State<AllProductsScreen> {
               ),
               const SizedBox(width: 10),
               Text(
-                "asdasd",
+                getAddress!,
                 style: GoogleFonts.poppins(color: Colors.black),
               ),
             ],
