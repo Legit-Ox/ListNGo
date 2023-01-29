@@ -14,13 +14,13 @@ class IntroPage1 extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SizedBox(
-            height: MediaQuery.of(context).size.height * 0.1,
+            height: MediaQuery.of(context).size.height * 0.15,
           ),
           Container(
-            height: MediaQuery.of(context).size.height * 0.1,
+            height: MediaQuery.of(context).size.height * 0.15,
             alignment: Alignment.center,
             child: SvgPicture.asset(
-              "assets/images/first.svg",
+              "assets/images/first1.svg",
               fit: BoxFit.contain,
             ),
           ),
@@ -36,7 +36,7 @@ class IntroPage1 extends StatelessWidget {
             ),
           ),
           const SizedBox(
-            height: 20,
+            height: 25,
           ),
           Padding(
             padding: EdgeInsets.fromLTRB(

@@ -208,7 +208,7 @@ class _LoginPageCustomersState extends State<LoginPageCustomers> {
                     padding: const EdgeInsets.symmetric(horizontal: 25),
                     child: GestureDetector(
                       onTap: () async {
-                        await AuthServices.signInwithGoogle('Customer')
+                        await AuthServices.logIniwthGoogle()
                             .then((value) async {
                           if (value == "Success") {
                             // await _db

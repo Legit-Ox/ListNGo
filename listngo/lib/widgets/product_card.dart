@@ -10,9 +10,8 @@ class ProductCard extends StatelessWidget {
     required this.price,
     required this.press,
   }) : super(key: key);
-  final String image, title;
+  final String image, title, price;
   final VoidCallback press;
-  final int price;
 
   @override
   Widget build(BuildContext context) {
@@ -23,17 +22,17 @@ class ProductCard extends StatelessWidget {
         padding: const EdgeInsets.all(16 / 2),
         decoration: BoxDecoration(
           color: secondaryPurpleTint.withOpacity(0.3),
-          borderRadius: BorderRadius.all(Radius.circular(12)),
+          borderRadius: const BorderRadius.all(Radius.circular(12)),
         ),
         child: Column(
           children: [
             Container(
               width: double.infinity,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Colors.white,
-                borderRadius: const BorderRadius.all(Radius.circular(12)),
+                borderRadius: BorderRadius.all(Radius.circular(12)),
               ),
-              child: Image.asset(
+              child: Image.network(
                 image,
                 height: 132,
               ),
@@ -53,7 +52,7 @@ class ProductCard extends StatelessWidget {
                 const SizedBox(width: 16 / 4),
                 Text(
                   "\$$price",
-                  style: Theme.of(context).textTheme.subtitle2,
+                  style: Theme.of(context).textTheme.titleSmall,
                 ),
               ],
             )

@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:listngo/constants.dart';
@@ -15,6 +17,80 @@ const OutlineInputBorder outlineInputBorder = OutlineInputBorder(
 );
 
 class _RetailerDashboardState extends State<RetailerDashboard> {
+  late String? getName = "";
+  late String? getType = "";
+  late String? getArea = "";
+  late String? getDesc = "";
+
+  Future<void> _getShopName() async {
+    await FirebaseFirestore.instance
+        .collection('Retailer')
+        .doc((FirebaseAuth.instance.currentUser)!.uid)
+        .get()
+        .then((value) {
+      print(value.data()!['shopName'].toString());
+      setState(() {
+        getName = value.data()!['shopName'].toString();
+      });
+    });
+  }
+
+  Future<void> _getShopType() async {
+    await FirebaseFirestore.instance
+        .collection('Retailer')
+        .doc((FirebaseAuth.instance.currentUser)!.uid)
+        .get()
+        .then((value) {
+      print(value.data()!['type'].toString());
+      setState(() {
+        getType = value.data()!['type'].toString().length > 10
+            ? "${value.data()!['type'].toString().substring(0, 10)}..."
+            : value.data()!['type'].toString();
+      });
+    });
+  }
+
+  Future<void> _getArea() async {
+    await FirebaseFirestore.instance
+        .collection('Retailer')
+        .doc((FirebaseAuth.instance.currentUser)!.uid)
+        .get()
+        .then((value) {
+      print(value.data()!['location'].toString());
+      setState(() {
+        getArea = value.data()!['location'].toString().length > 10
+            ? "${value.data()!['location'].toString().substring(0, 10)}..."
+            : value.data()!['location'].toString();
+      });
+    });
+  }
+
+  Future<void> _getDesc() async {
+    await FirebaseFirestore.instance
+        .collection('Retailer')
+        .doc((FirebaseAuth.instance.currentUser)!.uid)
+        .get()
+        .then((value) {
+      print(value.data()!['description'].toString());
+      setState(() {
+        getDesc = value.data()!['description'].toString().length > 10
+            ? "${value.data()!['description'].toString().substring(0, 10)}..."
+            : value.data()!['description'].toString();
+      });
+    });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    _getDesc();
+    _getArea();
+    _getShopType();
+    _getShopName();
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -62,8 +138,9 @@ class _RetailerDashboardState extends State<RetailerDashboard> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Jitendra Stores',
+                        getName.toString(),
                         style: GoogleFonts.poppins(fontSize: 20),
+                        maxLines: 2,
                       ),
                       SizedBox(
                         height: size.height * 0.005,
@@ -75,7 +152,7 @@ class _RetailerDashboardState extends State<RetailerDashboard> {
                             color: primaryGreen,
                             borderRadius: BorderRadius.circular(10)),
                         child: Text(
-                          "General",
+                          getType.toString(),
                           style: GoogleFonts.poppins(
                               fontSize: 12, color: Colors.white),
                         ),
@@ -83,7 +160,7 @@ class _RetailerDashboardState extends State<RetailerDashboard> {
                       Container(
                         child: Chip(
                           label: Text(
-                            "Shahibaug",
+                            getArea.toString(),
                             style: GoogleFonts.poppins(
                                 fontSize: 12, color: Colors.white),
                           ),
@@ -135,7 +212,7 @@ class _RetailerDashboardState extends State<RetailerDashboard> {
               color: Color.fromARGB(255, 146, 146, 146),
             ),
             Text(
-              'We sell everything from notebooks to ice-creams. Visit us at the given address.',
+              getDesc.toString(),
               style: GoogleFonts.poppins(fontSize: 16),
             ),
             SizedBox(

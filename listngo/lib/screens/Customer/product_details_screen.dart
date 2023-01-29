@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 
 import 'package:listngo/constants.dart';
-import 'package:listngo/models/Product.dart';
 
 class DetailsScreen extends StatelessWidget {
-  const DetailsScreen({Key? key, required this.product}) : super(key: key);
+  const DetailsScreen(
+      {Key? key,
+      required this.image,
+      required this.title,
+      required this.price,
+      required this.description})
+      : super(key: key);
 
-  final Product product;
+  final String image, title, price, description;
 
   @override
   Widget build(BuildContext context) {
@@ -31,8 +36,8 @@ class DetailsScreen extends StatelessWidget {
       ),
       body: Column(
         children: [
-          Image.asset(
-            product.image,
+          Image.network(
+            image,
             height: MediaQuery.of(context).size.height * 0.4,
             fit: BoxFit.cover,
           ),
@@ -54,26 +59,26 @@ class DetailsScreen extends StatelessWidget {
                     children: [
                       Expanded(
                         child: Text(
-                          product.title,
-                          style: Theme.of(context).textTheme.headline6,
+                          title,
+                          style: Theme.of(context).textTheme.titleLarge,
                         ),
                       ),
                       const SizedBox(width: 16),
                       Text(
-                        "\$${product.price}",
-                        style: Theme.of(context).textTheme.headline6,
+                        "\$$price",
+                        style: Theme.of(context).textTheme.titleLarge,
                       ),
                     ],
                   ),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 16),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 16),
                     child: Text(
-                      "A Henley shirt is a collarless pullover shirt, by a round neckline and a placket about 3 to 5 inches (8 to 13 cm) long and usually having 2–5 buttons.",
+                      description,
                     ),
                   ),
                   Text(
                     "Colors",
-                    style: Theme.of(context).textTheme.subtitle2,
+                    style: Theme.of(context).textTheme.titleSmall,
                   ),
                   const SizedBox(height: 16 / 2),
                   // Row(

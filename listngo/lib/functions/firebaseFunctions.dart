@@ -12,6 +12,6 @@ class FirestoreServices {
     await FirebaseFirestore.instance
         .collection('Retailer')
         .doc(uid)
-        .set({"email": email, "password": password});
+        .set({"email": email, "password": password, "Products": []});
   }
 }

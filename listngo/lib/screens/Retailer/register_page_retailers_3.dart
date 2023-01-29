@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:listngo/screens/Retailer/add_products_screen.dart';
+import 'package:listngo/screens/Retailer/register_page_retailers_4.dart';
 import 'package:listngo/utilities/customer_textfield.dart';
 
 class RegisterPageRetailers3 extends StatefulWidget {
@@ -19,14 +19,14 @@ class _RegisterPageRetailers3State extends State<RegisterPageRetailers3> {
   final _formKey = GlobalKey<FormState>();
   final _db = FirebaseFirestore.instance;
 
-  final roles = [
+  final types = [
     'Stationary',
     'General Stores',
     'Medicine',
     'Grocery Stores',
     'Others',
   ];
-  String? selectedValue1;
+  String? _selectedValue1;
   bool isRoleOthers = false;
   @override
   void dispose() {
@@ -100,15 +100,15 @@ class _RegisterPageRetailers3State extends State<RegisterPageRetailers3> {
                         dropdownColor: const Color.fromARGB(255, 161, 161, 161),
                         borderRadius: BorderRadius.circular(10),
                         isExpanded: true,
-                        value: selectedValue1,
+                        value: _selectedValue1,
                         hint: const Text('Type'),
                         onChanged: (newValue) => setState(() {
-                          selectedValue1 = newValue!;
-                          if (selectedValue1 == 'Others') {
+                          _selectedValue1 = newValue!;
+                          if (_selectedValue1 == 'Others') {
                             isRoleOthers = true;
                           }
                         }),
-                        items: roles
+                        items: types
                             .map<DropdownMenuItem<String>>((String value) =>
                                 DropdownMenuItem<String>(
                                   value: value,
@@ -157,12 +157,13 @@ class _RegisterPageRetailers3State extends State<RegisterPageRetailers3> {
                           'shopName': _shopeNameController.text.trim(),
                           'location': _locationController.text.trim(),
                           'gstNumber': _gstNumberController.text.trim(),
-                          'role': selectedValue1,
+                          'type': _selectedValue1,
                         });
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const AddProducts(),
+                            builder: (context) =>
+                                const RegisterPageRetailers4(),
                           ),
                         );
                       } else {
