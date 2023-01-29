@@ -33,7 +33,7 @@ var _scaffoldKey = GlobalKey<ScaffoldState>();
 class _CustomerDashboardScreenState extends State<CustomerDashboardScreen> {
   final user = FirebaseAuth.instance.currentUser;
   late String? getAddress = "";
-  late PageController _scrollController = PageController();
+  late final PageController _scrollController = PageController();
 
   @override
   void initState() {
@@ -48,11 +48,11 @@ class _CustomerDashboardScreenState extends State<CustomerDashboardScreen> {
         .doc((FirebaseAuth.instance.currentUser)!.uid)
         .get()
         .then((value) {
-      print(value.data()!['address'][0].toString());
+      print(value.data()!['address'][2].toString());
       setState(() {
-        getAddress = value.data()!['address'][0].toString().length > 10
-            ? "${value.data()!['address'][0].toString().substring(0, 10)}..."
-            : value.data()!['address'][0].toString();
+        getAddress = value.data()!['address'][2].toString().length > 10
+            ? "${value.data()!['address'][2].toString().substring(0, 10)}..."
+            : value.data()!['address'][2].toString();
       });
     });
   }
@@ -63,7 +63,7 @@ class _CustomerDashboardScreenState extends State<CustomerDashboardScreen> {
         key: _scaffoldKey,
         drawer: const drawerWidget(),
         appBar: AppBar(
-          backgroundColor: Color.fromARGB(255, 255, 255, 255),
+          backgroundColor: const Color.fromARGB(255, 255, 255, 255),
           leading: IconButton(
             onPressed: () {
               _scaffoldKey.currentState!.openDrawer();
@@ -103,7 +103,7 @@ class _CustomerDashboardScreenState extends State<CustomerDashboardScreen> {
             ),
           ],
         ),
-        backgroundColor: Color.fromARGB(255, 255, 255, 255),
+        backgroundColor: const Color.fromARGB(255, 255, 255, 255),
         body: SingleChildScrollView(
             physics: const BouncingScrollPhysics(
                 parent: AlwaysScrollableScrollPhysics()),
@@ -124,9 +124,9 @@ class _CustomerDashboardScreenState extends State<CustomerDashboardScreen> {
                 height: MediaQuery.of(context).size.height * 0.02,
               ),
               Container(
-                margin: EdgeInsets.symmetric(horizontal: 5),
+                margin: const EdgeInsets.symmetric(horizontal: 5),
                 decoration: BoxDecoration(
-                    boxShadow: [
+                    boxShadow: const [
                       BoxShadow(
                         color: Colors.black,
                         offset: Offset(4, 4),
