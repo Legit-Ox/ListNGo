@@ -51,6 +51,8 @@ Future<dynamic> getCurrentPosition(context) async {
         .then((List<Placemark> placemarks) {
       Placemark place = placemarks[0];
       storeUsersAddress({
+        position.latitude.toString(),
+        position.longitude.toString(),
         place.street.toString(),
         place.subLocality.toString(),
         place.subAdministrativeArea.toString(),
