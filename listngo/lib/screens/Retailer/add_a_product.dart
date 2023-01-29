@@ -8,6 +8,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:listngo/constants.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
+
 class AddAProduct extends StatefulWidget {
   const AddAProduct({Key? key}) : super(key: key);
 
