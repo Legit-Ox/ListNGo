@@ -42,6 +42,7 @@ It might not work in some cases due to version conflits within flutter widgets, 
 
 
 **For futher queries, it's recommend see the notes on [this](https://docs.flutter.dev/) or visit out disscussions.**
+**Watch the video of how the app looks =>[here](https://youtu.be/LfpBUUg7otI)**
 
 ### This app is made in Ingenium Hackathon.
 ## Credits:
@@ -49,3 +50,4 @@ It might not work in some cases due to version conflits within flutter widgets, 
 **[Jash Parikh](https://github.com/Jash7447)**<br />
 **[Hash Bhagat](https://github.com/BhagatHarsh)**<br />
 **[Kathan Dave](https://github.com/KathanrDave)**<br />
+
